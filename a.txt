@@ -1,2 +1,2 @@
 Abcd
-abc
+ab
