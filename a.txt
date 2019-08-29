@@ -1,10 +1,2 @@
-<<<<<<< HEAD
-bbbb
-=======
 Abcd
->>>>>>> test
-<<<<<<< HEAD
-master
-=======
-test
->>>>>>> test
+abc
