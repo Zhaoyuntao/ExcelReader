@@ -1,6 +1,2 @@
 Abcd
-<<<<<<< HEAD
-master
-=======
-test
->>>>>>> test
+ab
