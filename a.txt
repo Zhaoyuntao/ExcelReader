@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 bbbb
+=======
+Abcd
+>>>>>>> test
 <<<<<<< HEAD
 master
 =======
