@@ -3,4 +3,47 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#ffffffff</color>
+
+    <!-- Color for group call details -->
+    <!-- Zayhu call activity -->
+
+    <!-- totok global color v2.3 -->
+
+    <!-- totok list item colors -->
+
+    <!-- totok button colors -->
+
+    <!--  MD Start-->
+
+    <!-- Style Colors -->
+
+    <!-- Buttons -->
+    <!-- Blue raised button -->
+    <!-- Red button -->
+    <!-- Green button -->
+
+    <!-- Yellow button -->
+
+    <!--Selectable Widget-->
+
+    <!-- Common Snackbar-->
+
+    <!-- Common Dialog-->
+
+    <!-- Selectable Itme Background-->
+
+    <!-- giphy -->
+
+    <!-- event -->
+
+    <!-- Group Call Detail-->
+
+    <!-- contact select -->
+
+    <color name="yc_mtrl_doodle_ripple_color_for_black_background">#aaaaaa</color>
+
+    <!--  MD End-->
+
 </resources>

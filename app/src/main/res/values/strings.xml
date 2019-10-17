@@ -1,3 +1,293 @@
 <resources>
     <string name="app_name">test2app</string>
+    <!--新加的更新文案-->
+
+
+   <!-- Register Step 1 -->
+   <!-- Register Step 2 -->
+
+   <!-- Register Step 3 -->
+
+   <!-- Register Step 4 -->
+
+   <!-- Login -->
+
+   <!-- bind email -->
+
+   <!-- change password -->
+
+   <!-- Logout -->
+
+   <!-- register country code -->
+
+   <!-- about -->
+
+   <!-- call log -->
+
+   <!-- call session -->
+
+
+    <!-- Basic Ctrl for session -->
+
+
+    <!-- Text for session status -->
+
+   <!-- Toast -->
+   <string name="totok_call_phone_tips_brush">Doodle</string>
+
+    <!-- contacts -->
+
+   <string name="contact_add_button_add">Add</string>
+
+   <!-- Strings for group -->
+
+   <!-- main -->
+
+
+    <!-- Tab Titles -->
+
+
+   <!-- logout -->
+
+   <!-- bubble tips -->
+
+   <!-- message -->
+
+   <!-- permission check -->
+
+   <!-- settings -->
+
+   <!-- sharing -->
+
+   <!-- user details -->
+
+
+   <!-- app -->
+
+   <!-- Names -->
+
+   <!-- Permission -->
+
+   <!-- paint call -->
+
+
+   <!-- svc -->
+
+   <!-- facebook -->
+
+   <!-- Rating -->
+
+   <!-- Rating -->
+
+   <!-- for translation batch 3 -->
+
+   <!-- v3.2 -->
+
+
+   <!-- V3.3 -->
+   <string name="zayhu_fragment_open_video_txt">Video</string>
+
+   <!-- user guide -->
+
+
+   <!-- v3.4 -->
+
+
+   <!-- V3.5 -->
+
+   <!-- v3.6 -->
+
+   <!--pc login-->
+
+   <!--app update hint-->
+
+   <!--official account activity-->
+
+   <!--for group voice call limit-->
+
+   <!-- sticker store-->
+
+   <!-- String for network connectivity BEGIN -->
+
+   <!-- String for network connectivity END -->
+
+    <!-- Call Menu -->
+
+   <!-- Strings for MD -->
+
+   <!-- conversation -->
+
+   <!--Group Call Details-->
+
+   <!--Register and Login-->
+
+   <!-- Settings -->
+
+   <!-- rating dialog --><![CDATA[
+
+
+
+
+
+
+
+       
+
+    ]]><!-- chat hall -->
+
+   <!-- SnapFun -->
+
+   <!-- photo -->
+
+   <!-- android 权限 -->
+
+   <!-- chatroom -->
+
+
+    <!-- AD -->
+
+    <!-- Strings for chatRoom-->
+
+   <!-- battery optimization -->
+
+
+   <!--full screen ad-->
+
+    <!-- Begin : Richfun -->
+
+    <!-- Begin : 关系链 -->
+
+   <!-- bluetooth -->
+
+    <!--HuaweiGame-->
+
+    <!--PingPong-->
+
+   <!--richFun 二期-->
+
+
+   <!--Nearby-->
+
+   <!--richFun 三期-->
+
+   <!-- richFun 四期-->
+
+   <!--
+   <string name="yc_main_setting_invite_cell_desc">关闭后, 将不在主页面向你推荐你可能认识的人</string>
+   -->
+
+    <!-- Duobao-->
+
+   <!--richFun mixFeed-->
+
+    <!--set password-->
+
+   <!--incoming call-->
+   <string name="totok_call_phone_tips_message">Message</string>
+    <string name="totok_call_phone_tips_mute">Mute</string>
+    <string name="totok_call_phone_tips_speaker">Speaker</string>
+    <string name="totok_call_phone_tips_local_time">Other side</string>
+
+   <!--Friends recommendation-->
+
+   <!--call logs-->
+
+   <!-- call end -->
+
+   <!--weather-->
+
+   <!--location-->
+
+   <!--TBH-->
+
+   <!--YEE Wallet-->
+
+   <!-- group setting -->
+
+   <!--file-->
+
+   <!-- group notification -->
+
+   <!--group conversation @-->
+
+   <!-- 撤回消息 -->
+
+   <!--password fragment-->
+
+   <!-- red package -->
+
+   <!--yee wallet withdraw-->
+
+   <!--wallet sign up-->
+
+    <!-- transfer -->
+
+   <!--趋势图-->
+
+   <!--bind email-->
+
+   <!--create new group-->
+
+   <!--新手红包-->
+    <!--yc_get_reward-->
+    <!--yc_go_get_reward-->
+    <!--yc_open_wallet_des-->
+    <!--yc_wallet_box_remove_des-->
+    <!--yc_reward_out-->
+    <!--yc_wallet_box_error_code_741-->
+    <!--yc_take_success-->
+    <!--yc_wallet_box_error_code_742-->
+    <!--yc_wallet_author_facebook-->
+    <!--yc_wallet_box_error_code_742-->
+    <!--yc_wallet_box_set_pw_msg-->
+   <!--yc_wallet_delete_box_msg-->
+    <!--yc_enter_transfer_list-->
+    <!--钱包改版+0确认-->
+    <!--钱包密码前置-->
+
+    <!--yee contract-->
+
+   <!--群消息打赏-->
+   <!--OTC-->
+
+
+   <!--otc temporary-->
+
+   <!--单数形式-->
+   <!--复数形式-->
+
+   <!--invite join group-->
+
+   <!--1v1 create group-->
+
+   <!--taking picture and recording-->
+
+   <!-- change phone number-->
+
+
+   <!--Web IM-->
+
+   <!-- scan the code to join the octopus conference room -->
+
+   <!-- system notification switch status prompt -->
+
+   <!-- personal blacklist -->
+
+   <!-- notification in app -->
+
+   <!-- Share to Whatsapp-->
+
+   <!--report issue-->
+
+   <!--call end share to friends-->
+
+   <!--call end quality score-->
+
+   <!--msg preview-->
+
+   <!--group history-->
+
+
+   <!--miss call page-->
+
 </resources>
