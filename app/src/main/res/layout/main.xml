@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="5dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp">
+
+        <com.zhaoyuntao.androidutils.component.ZButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:color_back="#00000000"
+            app:color_border="@color/white"
+            app:w_border="1dp">
+
+            <com.test.test2app.ZTextView
+                android:id="@+id/ztextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell" />
+        </com.zhaoyuntao.androidutils.component.ZButton>
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/listview2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="5dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp">
+
+        <com.zhaoyuntao.androidutils.component.ZButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:color_back="#00000000"
+            app:color_border="@color/white"
+            app:w_border="1dp">
+
+            <com.test.test2app.ZTextView
+                android:id="@+id/ztextview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell"
+                android:layoutDirection="rtl" />
+        </com.zhaoyuntao.androidutils.component.ZButton>
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="200dp"
+        android:background="@color/blue" />
+</LinearLayout>

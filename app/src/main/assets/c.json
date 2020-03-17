@@ -1,0 +1,99 @@
+{
+  "config_version": 0,
+  "update_config": [
+    {
+      "level": 0,
+      "android_version": [
+        0
+      ],
+      ""
+      "target_version": 219,
+      "dialog_type": 2,
+      "remind_interval": 12,
+      "update_method": [
+        {
+          "level": 0,
+          "type": 1,
+          "web_url": "https://totok.ai/dl"
+        },
+        {
+          "level": 1,
+          "type": 0,
+          "download_url": "https://static.totok.ai/android/totok_release_v1_3_9_219.apk"
+        },
+        {
+          "level": 2,
+          "type": 2,
+          "manufacturer": [
+            "xiaomi",
+            "samsung"
+          ],
+          "app_store": [
+            "yingyongbao",
+            "wandoujia"
+          ]
+        }
+      ],
+      "message": [
+        {
+          "language": "en",
+          "title": "Updates",
+          "description": "New version 1.2.3 is ready for you"
+        },
+        {
+          "language": "ar",
+          "title": "Updates2",
+          "description": "New version 1.2.3 is ready for you2"
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "android_version": [
+        6
+      ],
+      "app_version_special": [
+        88
+      ],
+      "target_version": 219,
+      "dialog_type": 2,
+      "remind_interval": 12,
+      "update_method": [
+        {
+          "level": 0,
+          "type": 1,
+          "web_url": "https://totok.ai/dl"
+        },
+        {
+          "level": 1,
+          "type": 0,
+          "download_url": "https://static.totok.ai/android/totok_release_v1_3_9_219.apk"
+        },
+        {
+          "level": 2,
+          "type": 2,
+          "manufacturer": [
+            "xiaomi",
+            "samsung"
+          ],
+          "app_store": [
+            "yingyongbao",
+            "wandoujia"
+          ]
+        }
+      ],
+      "message": [
+        {
+          "language": "en",
+          "title": "Updates",
+          "description": "New version 1.2.3 is ready for you"
+        },
+        {
+          "language": "ar",
+          "title": "Updates2",
+          "description": "New version 1.2.3 is ready for you2"
+        }
+      ]
+    }
+  ]
+}

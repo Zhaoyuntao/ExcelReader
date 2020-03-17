@@ -1,0 +1,44 @@
+//普通版本下的配置
+{
+  "update_config": [
+    {
+      "target_version":167,       //必须，如果不配置或者低于当前版本号，该update_config不生效
+      "update_method":[             //必须，如果不配置或者为空，该update_config不生效
+        {
+          "level":0,                        //非必须，如果不配置，默认level取0,level数值越大优先级越高
+          "type":1,                         //必须，如果不配置，该item跳过，不生效
+          "download_url":"https:***.apk"    //必须，type==1时，必须包含download_url字段，如果不包含，该item跳过，不生效
+        },
+        {
+          "level":2,                                          //非必须，同上
+          "type":3,                                           //必须，同上
+          "manufacturer":["huawei","xiaomi","samsung"],      //必须，type==3时，必须至少包含manufacturers和app_stores字段中的一个，如果不包含，该item跳过，不生效
+          "app_store":["baidu","yingyongbao","wandoujia"]    //同时存在时，manufacturers优先于app_stores
+        }
+      ]
+    }
+
+
+
+  //假设e2e有n个特殊版本(91-95,99,100)需要升级到101版本，且不跳应用商店，直接跳官网
+
+    {
+      "app_version_range":[                    //非必须，filter（filter为空无效）和special同时控制当前版本号，如果都不配置，默认全部版本
+        {
+          "min":91,                  //必须，如果min或max空，或者 max < min， filter不生效
+          "max":95
+        }
+      ],
+      "app_version_special":[99,100],                //非必须，同filter
+      "target_version":101,       //必须，如果不配置或者低于当前版本号，该update_config不生效
+      "update_method":[             //必须，如果不配置或者为空，该update_config不生效
+        {
+          "level":1,                        //非必须，同上
+          "type":1,                         //必须，同上
+          "web_url":"https://***"           //必须，type==2时，必须包含web_url字段，如果不包含，该item跳过，不生效
+        }
+      ]
+    }
+  ]
+}
+
