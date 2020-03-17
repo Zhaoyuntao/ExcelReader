@@ -1,4 +1,4 @@
-package com.test.test2app.huaweimeeting;
+package com.test.test2app.pagerview;
 
 import android.view.View;
 import android.view.ViewGroup;

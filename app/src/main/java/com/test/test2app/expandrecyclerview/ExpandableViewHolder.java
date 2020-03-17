@@ -17,15 +17,18 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ExpandableViewHolder.this.onClick(v)) {
+                    return;
+                }
                 changeExpandState(getLayoutPosition());
             }
         });
-        initLayout(itemView);
     }
 
-    public abstract void initLayout(final View itemView);
-
     final public void initExpandState(int position) {
+        if (!isExpandable()) {
+            return;
+        }
         ExpandableEntry expandableEntry = expandListener.get(position);
         if (expandableEntry == null || !expandableEntry.isParent()) {
             return;
@@ -38,6 +41,9 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
     }
 
     final public void changeExpandState(int position) {
+        if (!isExpandable()) {
+            return;
+        }
         ExpandableEntry expandableEntry = expandListener.get(position);
         if (!expandableEntry.isParent()) {
             return;
@@ -51,9 +57,19 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    protected abstract void onExpand();
+    public boolean onClick(View v) {
+        return false;
+    }
 
-    protected abstract void onShrink();
+    protected boolean isExpandable() {
+        return true;
+    }
+
+    protected void onExpand() {
+    }
+
+    protected void onShrink() {
+    }
 
 
     final public void setExpandListener(ExpandListener expandListener) {

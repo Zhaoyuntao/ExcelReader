@@ -15,7 +15,7 @@
         android:textAlignment="center"
         android:textColor="@color/white" />
 
-    <com.test.test2app.huaweimeeting.ZTabLayout
+    <com.test.test2app.pagerview.ZTabLayout
         android:id="@+id/ztab"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -26,7 +26,7 @@
         android:layout_height="1px"
         android:background="#f5f5f5" />
 
-    <com.test.test2app.huaweimeeting.ZPagerView
+    <com.test.test2app.pagerview.ZPagerView
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -1,16 +1,15 @@
-package com.test.test2app.huaweimeeting;
-
+package com.test.test2app.huaweimeeting.conference.entry;
 
 /**
  * created by zhaoyuntao
  * on 2020-03-16
  * description:
  */
-public class TitleEntry extends ConferenceBaseItem {
+public class ConferenceTitleEntry extends ConferenceBaseItem {
 
     private String title;
 
-    public TitleEntry(String title) {
+    public ConferenceTitleEntry(String title) {
         setTitle(title);
     }
 

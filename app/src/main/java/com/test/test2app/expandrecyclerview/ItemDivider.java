@@ -1,4 +1,4 @@
-package com.test.test2app.huaweimeeting;
+package com.test.test2app.expandrecyclerview;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

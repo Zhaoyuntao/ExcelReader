@@ -1,4 +1,4 @@
-package com.test.test2app.huaweimeeting;
+package com.test.test2app.huaweimeeting.conference.adapter;
 
 import android.view.View;
 import android.widget.Button;
@@ -9,19 +9,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.test2app.R;
+import com.test.test2app.expandrecyclerview.ExpandableViewHolder;
 
-public class ConferenceItemHolder extends RecyclerView.ViewHolder {
+public class ConferenceHolder extends ExpandableViewHolder {
     private TextView textView1;
     private TextView textView2;
     private TextView title;
     private Button button;
 
-    public ConferenceItemHolder(@NonNull View itemView) {
+    public ConferenceHolder(@NonNull View itemView) {
         super(itemView);
         textView1 = itemView.findViewById(R.id.text1);
         textView2 = itemView.findViewById(R.id.text2);
         button = itemView.findViewById(R.id.button);
         title = itemView.findViewById(R.id.title);
+    }
+
+    @Override
+    protected boolean isExpandable() {
+        return true;
     }
 
     public void setTextView1(String text) {
@@ -51,6 +57,7 @@ public class ConferenceItemHolder extends RecyclerView.ViewHolder {
         }
         button.setVisibility(View.GONE);
     }
+
     public void disableButton() {
         if (button == null) {
             return;

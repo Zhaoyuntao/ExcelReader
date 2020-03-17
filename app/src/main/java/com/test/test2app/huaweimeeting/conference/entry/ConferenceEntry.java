@@ -1,4 +1,4 @@
-package com.test.test2app.huaweimeeting;
+package com.test.test2app.huaweimeeting.conference.entry;
 
 /**
  * created by zhaoyuntao

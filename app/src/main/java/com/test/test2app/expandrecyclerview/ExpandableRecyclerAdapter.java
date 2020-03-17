@@ -29,7 +29,7 @@ public abstract class ExpandableRecyclerAdapter<A extends ExpandableViewHolder, 
     @NotNull
     @Override
     final public A onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
-        A expandableViewHolder = getParentViewHolder(parent, viewType);
+        A expandableViewHolder = onCreateExpandableViewHolder(parent, viewType);
         expandableViewHolder.setExpandListener(new ExpandableViewHolder.ExpandListener() {
             @Override
             public void expand(int position) {
@@ -54,7 +54,7 @@ public abstract class ExpandableRecyclerAdapter<A extends ExpandableViewHolder, 
      *
      * @return
      */
-    public abstract A getParentViewHolder(@NotNull ViewGroup parent, int viewType);
+    public abstract A onCreateExpandableViewHolder(@NotNull ViewGroup parent, int viewType);
 
     @Override
     final public void onBindViewHolder(@NotNull A holder, int position) {
