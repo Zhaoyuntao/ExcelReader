@@ -1,0 +1,46 @@
+//全部配置介绍
+{
+  "config_version": 0,
+  "update_config":[
+    {
+      "level": 10,
+      "android_version":[0],            //非必须，如果不配置或者为空，默认全部版本
+      "app_version_range":[                    //非必须，filter（filter为空无效）和special同时控制当前版本号，如果都不配置，默认全部版本
+        {
+          "min":1,                  //必须，如果min或max空，或者 max < min， app_version_range不生效
+          "max":5000
+        }
+      ],
+      "app_version_special":[100],                //非必须，同app_version_range
+      "target_version":167,         //必须，如果不配置或者低于当前版本号，该update_config不生效
+      "dialog_type":2,              //非必须，如果不配置，默认采用2（所有取值：0，1，2）
+      "remind_interval":12,         //非必须，如果不配置，默认采用12，单位：h
+      "update_method":[             //必须，如果不配置或者为空，该update_config不生效
+        {
+          "level":0,                        //非必须，如果不配置，默认level取0,level数值越大优先级越高
+          "type":0,                         //必须，如果不配置，该item跳过，不生效（所有取值：0内部下载，1跳官网，2跳app store）
+          "download_url":"https:***.apk"    //必须，type==1时，必须包含download_url字段，如果不包含，该item跳过，不生效
+        },
+        {
+          "level":1,                        //非必须，同上
+          "type":1,                         //必须，同上
+          "web_url":"https://***"           //必须，type==2时，必须包含web_url字段，如果不包含，该item跳过，不生效
+        },
+        {
+          "level":2,                                          //非必须，同上
+          "type":2,                                           //必须，同上
+          "manufacturer":["huawei","xiaomi","samsung"],      //必须，type==3时，必须至少包含manufacturers和app_stores字段中的一个，如果不包含，该item跳过，不生效
+          "app_store":["baidu","yingyongbao","wandoujia"]    //同时存在时，manufacturers优先于app_stores
+        }
+      ],
+      "message":[                                             //非必须，如果没有该字段，客户端取本地默认值
+        {
+          "language":"en",                                    //非必须，如果没有该字段，默认按照en处理
+          "title":"Updates",                                  //非必须，如果没有该字段，默认值取"Updates"
+          "description":"New version 1.2.3 is ready for you"  //非必须，如果没有该字段，默认值取"New version $versionName is ready for you"
+        }
+      ]
+    }
+  ]，
+  ...........
+}

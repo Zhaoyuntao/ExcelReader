@@ -1,293 +1,41 @@
 <resources>
     <string name="app_name">test2app</string>
-    <!--新加的更新文案-->
 
+    <string name="totok_call_phone_tips_brush">Doodle</string>
 
-   <!-- Register Step 1 -->
-   <!-- Register Step 2 -->
+    <string name="contact_add_button_add">Add</string>
 
-   <!-- Register Step 3 -->
+    <string name="zayhu_fragment_open_video_txt">Video</string>
 
-   <!-- Register Step 4 -->
-
-   <!-- Login -->
-
-   <!-- bind email -->
-
-   <!-- change password -->
-
-   <!-- Logout -->
-
-   <!-- register country code -->
-
-   <!-- about -->
-
-   <!-- call log -->
-
-   <!-- call session -->
-
-
-    <!-- Basic Ctrl for session -->
-
-
-    <!-- Text for session status -->
-
-   <!-- Toast -->
-   <string name="totok_call_phone_tips_brush">Doodle</string>
-
-    <!-- contacts -->
-
-   <string name="contact_add_button_add">Add</string>
-
-   <!-- Strings for group -->
-
-   <!-- main -->
-
-
-    <!-- Tab Titles -->
-
-
-   <!-- logout -->
-
-   <!-- bubble tips -->
-
-   <!-- message -->
-
-   <!-- permission check -->
-
-   <!-- settings -->
-
-   <!-- sharing -->
-
-   <!-- user details -->
-
-
-   <!-- app -->
-
-   <!-- Names -->
-
-   <!-- Permission -->
-
-   <!-- paint call -->
-
-
-   <!-- svc -->
-
-   <!-- facebook -->
-
-   <!-- Rating -->
-
-   <!-- Rating -->
-
-   <!-- for translation batch 3 -->
-
-   <!-- v3.2 -->
-
-
-   <!-- V3.3 -->
-   <string name="zayhu_fragment_open_video_txt">Video</string>
-
-   <!-- user guide -->
-
-
-   <!-- v3.4 -->
-
-
-   <!-- V3.5 -->
-
-   <!-- v3.6 -->
-
-   <!--pc login-->
-
-   <!--app update hint-->
-
-   <!--official account activity-->
-
-   <!--for group voice call limit-->
-
-   <!-- sticker store-->
-
-   <!-- String for network connectivity BEGIN -->
-
-   <!-- String for network connectivity END -->
-
-    <!-- Call Menu -->
-
-   <!-- Strings for MD -->
-
-   <!-- conversation -->
-
-   <!--Group Call Details-->
-
-   <!--Register and Login-->
-
-   <!-- Settings -->
-
-   <!-- rating dialog --><![CDATA[
-
-
-
-
-
-
-
-       
-
-    ]]><!-- chat hall -->
-
-   <!-- SnapFun -->
-
-   <!-- photo -->
-
-   <!-- android 权限 -->
-
-   <!-- chatroom -->
-
-
-    <!-- AD -->
-
-    <!-- Strings for chatRoom-->
-
-   <!-- battery optimization -->
-
-
-   <!--full screen ad-->
-
-    <!-- Begin : Richfun -->
-
-    <!-- Begin : 关系链 -->
-
-   <!-- bluetooth -->
-
-    <!--HuaweiGame-->
-
-    <!--PingPong-->
-
-   <!--richFun 二期-->
-
-
-   <!--Nearby-->
-
-   <!--richFun 三期-->
-
-   <!-- richFun 四期-->
-
-   <!--
-   <string name="yc_main_setting_invite_cell_desc">关闭后, 将不在主页面向你推荐你可能认识的人</string>
-   -->
-
-    <!-- Duobao-->
-
-   <!--richFun mixFeed-->
-
-    <!--set password-->
-
-   <!--incoming call-->
-   <string name="totok_call_phone_tips_message">Message</string>
+    <string name="totok_call_phone_tips_message">Message</string>
     <string name="totok_call_phone_tips_mute">Mute</string>
+
+
+    <string name="string_fastrecord_duration_default">00:00.00</string>
     <string name="totok_call_phone_tips_speaker">Speaker</string>
+    <string name="string_fastrecord_cancel1">Slide to cancel</string>
+    <string name="string_fastrecord_cancel2">CANCEL</string>
+    <string name="string_fastrecord_duration_formation" translatable="false">%1$s:%2$s.%3$s</string>
+
     <string name="totok_call_phone_tips_local_time">Other side</string>
 
-   <!--Friends recommendation-->
+    <string name="string_dialog_permission_remind_negative">Cancel</string>
+    <string name="string_dialog_permission_remind_positive">Settings</string>
+    <string name="asdasdadsa"><![CDATA[reBr&tami=&s9E0et*u=wa]]></string>
+    <string name="string_abc">abckdnsjn %1$s jnacas</string>
 
-   <!--call logs-->
-
-   <!-- call end -->
-
-   <!--weather-->
-
-   <!--location-->
-
-   <!--TBH-->
-
-   <!--YEE Wallet-->
-
-   <!-- group setting -->
-
-   <!--file-->
-
-   <!-- group notification -->
-
-   <!--group conversation @-->
-
-   <!-- 撤回消息 -->
-
-   <!--password fragment-->
-
-   <!-- red package -->
-
-   <!--yee wallet withdraw-->
-
-   <!--wallet sign up-->
-
-    <!-- transfer -->
-
-   <!--趋势图-->
-
-   <!--bind email-->
-
-   <!--create new group-->
-
-   <!--新手红包-->
-    <!--yc_get_reward-->
-    <!--yc_go_get_reward-->
-    <!--yc_open_wallet_des-->
-    <!--yc_wallet_box_remove_des-->
-    <!--yc_reward_out-->
-    <!--yc_wallet_box_error_code_741-->
-    <!--yc_take_success-->
-    <!--yc_wallet_box_error_code_742-->
-    <!--yc_wallet_author_facebook-->
-    <!--yc_wallet_box_error_code_742-->
-    <!--yc_wallet_box_set_pw_msg-->
-   <!--yc_wallet_delete_box_msg-->
-    <!--yc_enter_transfer_list-->
-    <!--钱包改版+0确认-->
-    <!--钱包密码前置-->
-
-    <!--yee contract-->
-
-   <!--群消息打赏-->
-   <!--OTC-->
-
-
-   <!--otc temporary-->
-
-   <!--单数形式-->
-   <!--复数形式-->
-
-   <!--invite join group-->
-
-   <!--1v1 create group-->
-
-   <!--taking picture and recording-->
-
-   <!-- change phone number-->
-
-
-   <!--Web IM-->
-
-   <!-- scan the code to join the octopus conference room -->
-
-   <!-- system notification switch status prompt -->
-
-   <!-- personal blacklist -->
-
-   <!-- notification in app -->
-
-   <!-- Share to Whatsapp-->
-
-   <!--report issue-->
-
-   <!--call end share to friends-->
-
-   <!--call end quality score-->
-
-   <!--msg preview-->
-
-   <!--group history-->
-
-
-   <!--miss call page-->
-
+    <array name="com_google_android_gms_fonts_certs">
+        <item>@array/com_google_android_gms_fonts_certs_dev</item>
+        <item>@array/com_google_android_gms_fonts_certs_prod</item>
+    </array>
+    <string-array name="com_google_android_gms_fonts_certs_dev">
+        <item>
+            MIIEqDCCA5CgAwIBAgIJANWFuGx90071MA0GCSqGSIb3DQEBBAUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAeFw0wODA0MTUyMzM2NTZaFw0zNTA5MDEyMzM2NTZaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBANbOLggKv+IxTdGNs8/TGFy0PTP6DHThvbbR24kT9ixcOd9W+EaBPWW+wPPKQmsHxajtWjmQwWfna8mZuSeJS48LIgAZlKkpFeVyxW0qMBujb8X8ETrWy550NaFtI6t9+u7hZeTfHwqNvacKhp1RbE6dBRGWynwMVX8XW8N1+UjFaq6GCJukT4qmpN2afb8sCjUigq0GuMwYXrFVee74bQgLHWGJwPmvmLHC69EH6kWr22ijx4OKXlSIx2xT1AsSHee70w5iDBiK4aph27yH3TxkXy9V89TDdexAcKk/cVHYNnDBapcavl7y0RiQ4biu8ymM8Ga/nmzhRKya6G0cGw8CAQOjgfwwgfkwHQYDVR0OBBYEFI0cxb6VTEM8YYY6FbBMvAPyT+CyMIHJBgNVHSMEgcEwgb6AFI0cxb6VTEM8YYY6FbBMvAPyT+CyoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJANWFuGx90071MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBABnTDPEF+3iSP0wNfdIjIz1AlnrPzgAIHVvXxunW7SBrDhEglQZBbKJEk5kT0mtKoOD1JMrSu1xuTKEBahWRbqHsXclaXjoBADb0kkjVEJu/Lh5hgYZnOjvlba8Ld7HCKePCVePoTJBdI4fvugnL8TsgK05aIskyY0hKI9L8KfqfGTl1lzOv2KoWD0KWwtAWPoGChZxmQ+nBli+gwYMzM1vAkP+aayLe0a1EQimlOalO762r0GXO0ks+UeXde2Z4e+8S/pf7pITEI/tP+MxJTALw9QUWEv9lKTk+jkbqxbsh8nfBUapfKqYn0eidpwq2AzVp3juYl7//fKnaPhJD9gs=
+        </item>
+    </string-array>
+    <string-array name="com_google_android_gms_fonts_certs_prod">
+        <item>
+            MIIEQzCCAyugAwIBAgIJAMLgh0ZkSjCNMA0GCSqGSIb3DQEBBAUAMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDAeFw0wODA4MjEyMzEzMzRaFw0zNjAxMDcyMzEzMzRaMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAKtWLgDYO6IIrgqWbxJOKdoR8qtW0I9Y4sypEwPpt1TTcvZApxsdyxMJZ2JORland2qSGT2y5b+3JKkedxiLDmpHpDsz2WCbdxgxRczfey5YZnTJ4VZbH0xqWVW/8lGmPav5xVwnIiJS6HXk+BVKZF+JcWjAsb/GEuq/eFdpuzSqeYTcfi6idkyugwfYwXFU1+5fZKUaRKYCwkkFQVfcAs1fXA5V+++FGfvjJ/CxURaSxaBvGdGDhfXE28LWuT9ozCl5xw4Yq5OGazvV24mZVSoOO0yZ31j7kYvtwYK6NeADwbSxDdJEqO4k//0zOHKrUiGYXtqw/A0LFFtqoZKFjnkCAQOjgdkwgdYwHQYDVR0OBBYEFMd9jMIhF1Ylmn/Tgt9r45jk14alMIGmBgNVHSMEgZ4wgZuAFMd9jMIhF1Ylmn/Tgt9r45jk14aloXikdjB0MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLR29vZ2xlIEluYy4xEDAOBgNVBAsTB0FuZHJvaWQxEDAOBgNVBAMTB0FuZHJvaWSCCQDC4IdGZEowjTAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBAUAA4IBAQBt0lLO74UwLDYKqs6Tm8/yzKkEu116FmH4rkaymUIE0P9KaMftGlMexFlaYjzmB2OxZyl6euNXEsQH8gjwyxCUKRJNexBiGcCEyj6z+a1fuHHvkiaai+KL8W1EyNmgjmyy8AW7P+LLlkR+ho5zEHatRbM/YAnqGcFh5iZBqpknHf1SKMXFh4dd239FJ1jWYfbMDMy3NS5CTMQ2XFI1MvcyUTdZPErjQfTbQe3aDQsQcafEQPD+nqActifKZ0Np0IS9L9kR/wbNvyz6ENwPiTrjV2KRkEjH78ZMcUQXg0L3BYHJ3lc69Vs5Ddf9uUGGMYldX3WfMBEmh/9iFBDAaTCK
+        </item>
+    </string-array>
 </resources>

@@ -1,27 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.test.test2app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustNothing"
-            >
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainActivity91_Qmoji">
+        </activity>
+        <activity android:name=".MainActivity92_huawei_meeting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity9_openGL">
+        </activity>
+        <activity android:name=".MainActivity8_permission" />
+        <activity android:name=".MainActivity7_recyclerView" />
+        <activity android:name=".MainActivity6_pay" />
+        <activity android:name=".MainActivity5_takephoto" />
+        <activity android:name=".MainActivity4_grouptips" />
+        <activity android:name=".MainActivity3_sms" />
+        <activity android:name=".MainActivity2_record" />
+        <activity
+            android:name=".MainActivity_inputbar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MainActivity1_ad"
+            android:windowSoftInputMode="adjustNothing" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-7084074281104788~2199438140"/>
+            android:value="ca-app-pub-7084074281104788~2199438140" />
+
+        <provider
+            android:name=".MyContentProvider"
+            android:authorities="com.test.myProvider"
+            android:enabled="true"
+            android:exported="true" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.test.photo"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>
