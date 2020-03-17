@@ -1,41 +1,40 @@
-package com.test.test2app.huaweimeeting;
+package com.test.test2app.huaweimeeting.conference.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.test.test2app.R;
+import com.test.test2app.expandrecyclerview.ExpandableRecyclerAdapter;
+import com.test.test2app.huaweimeeting.conference.entry.ConferenceBaseItem;
+import com.test.test2app.huaweimeeting.conference.entry.ConferenceTitleEntry;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * created by zhaoyuntao
  * on 2020-03-16
  * description:
  */
-public class ConferenceAdapter extends RecyclerView.Adapter<ConferenceItemHolder> {
-    private List<ConferenceBaseItem> conferenceEntries;
+public class ConferenceAdapter extends ExpandableRecyclerAdapter<ConferenceHolder, ConferenceBaseItem> {
 
     private OnItemClickListener onItemClickListener;
 
     public ConferenceAdapter() {
-        conferenceEntries = new ArrayList<>();
     }
 
-    @NotNull
+
     @Override
-    public ConferenceItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ConferenceHolder onCreateExpandableViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case ConferenceBaseItem.TYPE_ITEM_NOT_START:
-            case ConferenceBaseItem.TYPE_ITEM_ONGING:
+            case ConferenceBaseItem.TYPE_ITEM_ONGOING:
             case ConferenceBaseItem.TYPE_ITEM_CLOSED:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_item_conference_list, parent, false);
+                break;
+            case ConferenceBaseItem.TYPE_ITEM_DIVIDER:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_divider_list, parent, false);
                 break;
             case ConferenceBaseItem.TYPE_TITLE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_item_title_conference_list, parent, false);
@@ -44,25 +43,20 @@ public class ConferenceAdapter extends RecyclerView.Adapter<ConferenceItemHolder
                 view = new View(parent.getContext());
                 break;
         }
-        return new ConferenceItemHolder(view);
+        return new ConferenceHolder(view);
     }
 
     @Override
-    public int getItemViewType(int position) {
-        ConferenceBaseItem conferenceBaseItem = conferenceEntries.get(position);
-        return conferenceBaseItem.getType();
+    public int getExpandableItemViewType(ConferenceBaseItem conferenceEntry) {
+        return conferenceEntry.getType();
     }
 
     @Override
-    public void onBindViewHolder(@NotNull ConferenceItemHolder holder, final int position) {
-        final ConferenceBaseItem conferenceBaseItem = conferenceEntries.get(position);
-        if (conferenceBaseItem == null) {
-            return;
-        }
+    protected void onBindExpandableViewHolder(ConferenceHolder holder, final int position, final ConferenceBaseItem conferenceBaseItem) {
         //todo set data in ui
         int type = conferenceBaseItem.getType();
         switch (type) {
-            case ConferenceBaseItem.TYPE_ITEM_ONGING:
+            case ConferenceBaseItem.TYPE_ITEM_ONGOING:
                 holder.setTextView1("15:30 2020-03-16");
                 holder.setOnButtonClickListener(new View.OnClickListener() {
                     @Override
@@ -83,19 +77,9 @@ public class ConferenceAdapter extends RecyclerView.Adapter<ConferenceItemHolder
                 break;
             case ConferenceBaseItem.TYPE_TITLE:
                 holder.setTextView1("18:30 2020-03-16");
-                holder.setTitle(((TitleEntry) conferenceBaseItem).getTitle());
+                holder.setTitle(((ConferenceTitleEntry) conferenceBaseItem).getTitle());
                 break;
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return conferenceEntries.size();
-    }
-
-    public void addConference(ConferenceBaseItem conferenceEntry) {
-        conferenceEntries.add(conferenceEntry);
-        notifyDataSetChanged();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

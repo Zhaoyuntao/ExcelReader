@@ -6,9 +6,8 @@
     android:descendantFocusability="afterDescendants"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:background="#f5f5f5"
-    android:paddingStart="16dp"
-    android:paddingEnd="19dp">
+    android:paddingStart="22dp"
+    android:paddingEnd="22dp">
 
     <TextView
         android:id="@+id/title"

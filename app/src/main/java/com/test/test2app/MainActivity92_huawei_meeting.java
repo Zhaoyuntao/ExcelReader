@@ -10,17 +10,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.test.test2app.huaweimeeting.ConferenceBaseItem;
-import com.test.test2app.huaweimeeting.ConferenceAdapter;
-import com.test.test2app.huaweimeeting.ConferenceEntry;
+import com.test.test2app.huaweimeeting.conference.entry.ConferenceBaseItem;
+import com.test.test2app.huaweimeeting.conference.adapter.ConferenceAdapter;
+import com.test.test2app.huaweimeeting.conference.entry.ConferenceEntry;
 import com.test.test2app.expandrecyclerview.ExpandableEntry;
-import com.test.test2app.huaweimeeting.ContactAdapter;
-import com.test.test2app.huaweimeeting.ContactEntry;
-import com.test.test2app.huaweimeeting.ItemDivider;
-import com.test.test2app.huaweimeeting.MainTabPagerAdapter;
-import com.test.test2app.huaweimeeting.TitleEntry;
-import com.test.test2app.huaweimeeting.ZPagerView;
-import com.test.test2app.huaweimeeting.ZTabLayout;
+import com.test.test2app.huaweimeeting.conference.entry.DividerEntry;
+import com.test.test2app.huaweimeeting.contact.adapter.ContactAdapter;
+import com.test.test2app.huaweimeeting.contact.entry.ContactBaseEntry;
+import com.test.test2app.huaweimeeting.contact.entry.ContactEntry;
+import com.test.test2app.expandrecyclerview.ItemDivider;
+import com.test.test2app.huaweimeeting.contact.entry.ContactTitleEntry;
+import com.test.test2app.huaweimeeting.contact.entry.DeviceEntry;
+import com.test.test2app.pagerview.MainTabPagerAdapter;
+import com.test.test2app.huaweimeeting.conference.entry.ConferenceTitleEntry;
+import com.test.test2app.pagerview.ZPagerView;
+import com.test.test2app.pagerview.ZTabLayout;
 import com.zhaoyuntao.androidutils.tools.T;
 
 import java.util.ArrayList;
@@ -43,36 +47,53 @@ public class MainActivity92_huawei_meeting extends BaseActivity {
         viewPager = findViewById(R.id.viewpager);
 
         final ConferenceAdapter conferenceAdapter = new ConferenceAdapter();
-        conferenceAdapter.addConference(new TitleEntry("ONGOING"));
-        conferenceAdapter.addConference(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_ONGING));
-        conferenceAdapter.addConference(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_ONGING));
-        conferenceAdapter.addConference(new TitleEntry("SCHEDULED"));
-        conferenceAdapter.addConference(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_NOT_START));
-        conferenceAdapter.addConference(new TitleEntry("CLOSED"));
-        conferenceAdapter.addConference(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_CLOSED));
+        List<ExpandableEntry> conferenceAdapterData = new ArrayList<>();
+        //on going
+        ExpandableEntry<ConferenceBaseItem> conferenceOnGoing = new ExpandableEntry<>(new ConferenceTitleEntry("ONGOING"));
+        conferenceOnGoing.addParamEntry(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_ONGOING));
+        conferenceOnGoing.addParamEntry(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_ONGOING));
+        conferenceOnGoing.setExpand(true);
+        conferenceAdapterData.add(conferenceOnGoing);
+        //divider
+        ExpandableEntry<ConferenceBaseItem> divider = new ExpandableEntry<>(new DividerEntry());
+        conferenceAdapterData.add(divider);
+        //schedule
+        ExpandableEntry<ConferenceBaseItem> conferenceSchedule = new ExpandableEntry<>(new ConferenceTitleEntry("SCHEDULED"));
+        conferenceSchedule.addParamEntry(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_NOT_START));
+        conferenceSchedule.addParamEntry(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_NOT_START));
+        conferenceSchedule.setExpand(true);
+        conferenceAdapterData.add(conferenceSchedule);
+        conferenceAdapterData.add(divider);
+        //closed
+        ExpandableEntry<ConferenceBaseItem> conferenceClosed = new ExpandableEntry<>(new ConferenceTitleEntry("CLOSED"));
+        conferenceClosed.addParamEntry(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_CLOSED));
+        conferenceClosed.addParamEntry(new ConferenceEntry(ConferenceBaseItem.TYPE_ITEM_CLOSED));
+        conferenceClosed.setExpand(true);
         conferenceAdapter.setOnItemClickListener(new ConferenceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ConferenceBaseItem conferenceBaseItem, int position) {
                 T.t(MainActivity92_huawei_meeting.this, "conferenceBaseItem:" + conferenceBaseItem.getType() + " position:" + position);
             }
         });
+        conferenceAdapterData.add(conferenceClosed);
+        conferenceAdapter.addData(conferenceAdapterData);
 
 
         final ContactAdapter expandableRecyclerAdapter = new ContactAdapter();
         List<ExpandableEntry> list = new ArrayList<>();
-        ExpandableEntry expandableEntry = new ExpandableEntry<>(new ContactEntry("TOTOK CONTACTS", ContactEntry.TYPE_TITLE));
-        expandableEntry.add(new ExpandableEntry<>(new ContactEntry("123", ContactEntry.TYPE_ITEM)));
-        expandableEntry.add(new ExpandableEntry<>(new ContactEntry("456", ContactEntry.TYPE_ITEM)));
-        expandableEntry.add(new ExpandableEntry<>(new ContactEntry("789", ContactEntry.TYPE_ITEM)));
-        expandableEntry.setExpand(true);
-        list.add(expandableEntry);
+        ExpandableEntry<ContactBaseEntry> totokContacts = new ExpandableEntry<>(new ContactTitleEntry("TOTOK CONTACTS"));
+        totokContacts.addParamEntry(new ContactEntry("123"));
+        totokContacts.addParamEntry(new ContactEntry("456"));
+        totokContacts.addParamEntry(new ContactEntry("789"));
+        totokContacts.setExpand(true);
+        list.add(totokContacts);
 
-        ExpandableEntry expandableEntry2 = new ExpandableEntry<>(new ContactEntry("DEVICE LIST", ContactEntry.TYPE_TITLE));
-        expandableEntry2.add(new ExpandableEntry<>(new ContactEntry("abc", ContactEntry.TYPE_ITEM)));
-        expandableEntry2.add(new ExpandableEntry<>(new ContactEntry("def", ContactEntry.TYPE_ITEM)));
-        expandableEntry2.add(new ExpandableEntry<>(new ContactEntry("ghi", ContactEntry.TYPE_ITEM)));
-        expandableEntry2.setExpand(false);
-        list.add(expandableEntry2);
+        ExpandableEntry<ContactBaseEntry> deviceList = new ExpandableEntry<>(new ContactTitleEntry("DEVICE LIST"));
+        deviceList.addParamEntry(new DeviceEntry("abc"));
+        deviceList.addParamEntry(new DeviceEntry("def"));
+        deviceList.addParamEntry(new DeviceEntry("ghi"));
+        deviceList.setExpand(false);
+        list.add(deviceList);
         expandableRecyclerAdapter.addData(list);
 
         MainTabPagerAdapter mainTabPagerAdapter = new MainTabPagerAdapter(new MainTabPagerAdapter.PagerInflater() {
@@ -87,7 +108,6 @@ public class MainActivity92_huawei_meeting extends BaseActivity {
                     View view = LayoutInflater.from(MainActivity92_huawei_meeting.this).inflate(R.layout.layout_huawei_meeting_page_conference_list, null);
                     RecyclerView recyclerView = view.findViewById(R.id.conferences);
                     recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-                    recyclerView.addItemDecoration(new ItemDivider(RecyclerView.VERTICAL));
                     recyclerView.setAdapter(conferenceAdapter);
                     return view;
                 } else {

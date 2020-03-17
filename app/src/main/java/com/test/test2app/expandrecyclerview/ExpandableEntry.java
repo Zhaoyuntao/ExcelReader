@@ -17,8 +17,8 @@ public class ExpandableEntry<A> {
 
     private A a;
 
-    public ExpandableEntry(A a) {
-        setParamEntry(a);
+    public<B extends A> ExpandableEntry(B b) {
+        this.a = b;
     }
 
     public boolean isParent() {
@@ -43,12 +43,6 @@ public class ExpandableEntry<A> {
 
     public int size() {
         return list.size();
-    }
-
-    public void add(ExpandableEntry expandableEntry) {
-        list.add(expandableEntry);
-        this.isParent = true;
-        expandableEntry.isParent = false;
     }
 
     public List<ExpandableEntry> getAll() {
@@ -76,8 +70,10 @@ public class ExpandableEntry<A> {
         return a;
     }
 
-    public ExpandableEntry setParamEntry(A a) {
-        this.a = a;
-        return this;
+    public <B> void addParamEntry(B a) {
+        ExpandableEntry<B> expandableEntry = new ExpandableEntry<>(a);
+        list.add(expandableEntry);
+        this.isParent = true;
+        expandableEntry.isParent = false;
     }
 }

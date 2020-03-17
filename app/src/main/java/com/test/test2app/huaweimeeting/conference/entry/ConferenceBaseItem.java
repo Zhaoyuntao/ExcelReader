@@ -1,4 +1,4 @@
-package com.test.test2app.huaweimeeting;
+package com.test.test2app.huaweimeeting.conference.entry;
 
 /**
  * created by zhaoyuntao
@@ -8,8 +8,9 @@ package com.test.test2app.huaweimeeting;
 public abstract class ConferenceBaseItem {
     public static final int TYPE_TITLE = 0;
     public static final int TYPE_ITEM_NOT_START = 1;
-    public static final int TYPE_ITEM_ONGING = 2;
+    public static final int TYPE_ITEM_ONGOING = 2;
     public static final int TYPE_ITEM_CLOSED = 3;
+    public static final int TYPE_ITEM_DIVIDER = 4;
 
     public abstract int getType();
 }

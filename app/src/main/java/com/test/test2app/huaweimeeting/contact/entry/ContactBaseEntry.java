@@ -1,24 +1,21 @@
-package com.test.test2app.huaweimeeting;
+package com.test.test2app.huaweimeeting.contact.entry;
 
 /**
  * created by zhaoyuntao
  * on 2020-03-17
  * description:
  */
-public class ContactEntry {
+public abstract class ContactBaseEntry {
     public static final int TYPE_TITLE = 0;
     public static final int TYPE_ITEM = 1;
+    public static final int TYPE_DEVICE = 2;
     private String name;
-    private int type;
 
-    public ContactEntry(String name, int type) {
+    public ContactBaseEntry(String name) {
         setName(name);
-        setType(type);
     }
 
-    public int getType() {
-        return type;
-    }
+    public abstract int getType();
 
     public String getName() {
         return name;
@@ -26,9 +23,5 @@ public class ContactEntry {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 }

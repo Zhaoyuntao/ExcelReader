@@ -6,8 +6,8 @@
     android:descendantFocusability="afterDescendants"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingEnd="19dp">
+    android:paddingStart="22dp"
+    android:paddingEnd="22dp">
 
     <ImageView
         android:id="@+id/avatar"
@@ -50,6 +50,7 @@
         android:layout_marginStart="20dp"
         android:enabled="true"
         android:focusable="false"
-        android:theme="@style/YCCheckbox" />
+        android:theme="@style/YCCheckbox"
+        android:visibility="gone" />
 
 </LinearLayout>
