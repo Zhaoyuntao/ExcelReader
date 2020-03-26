@@ -15,10 +15,6 @@ import androidx.viewpager.widget.PagerAdapter;
 public class MainTabPagerAdapter extends PagerAdapter {
     private PagerInflater pagerInflater;
 
-    public MainTabPagerAdapter() {
-
-    }
-
     public MainTabPagerAdapter(PagerInflater pagerInflater) {
         this.pagerInflater = pagerInflater;
     }
@@ -40,14 +36,9 @@ public class MainTabPagerAdapter extends PagerAdapter {
         return view;
     }
 
-    //因为它默认是看三张图片，第四张图片的时候就会报错，还有就是不要返回父类的作用
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
-    }
-
-    public void setPagerInflater(PagerInflater pagerInflater) {
-        this.pagerInflater = pagerInflater;
     }
 
     public interface PagerInflater {

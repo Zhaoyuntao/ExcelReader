@@ -22,7 +22,7 @@ import android.view.animation.LinearInterpolator;
 import androidx.annotation.Nullable;
 
 import com.test.test2app.R;
-import com.test.test2app.S;
+import com.zhaoyuntao.androidutils.tools.S;
 import com.test.test2app.utils.BitmapUtils;
 import com.zhaoyuntao.androidutils.tools.B;
 import com.zhaoyuntao.androidutils.tools.TextMeasure;

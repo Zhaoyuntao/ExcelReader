@@ -47,5 +47,7 @@
     </declare-styleable>
     <declare-styleable name="ZTabLayout">
         <attr name="ztab_color" format="color" />
+        <attr name="ztab_textcolor" format="color" />
+        <attr name="ztab_fulltab" format="boolean" />
     </declare-styleable>
 </resources>

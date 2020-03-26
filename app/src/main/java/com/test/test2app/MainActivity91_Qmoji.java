@@ -13,6 +13,7 @@ import androidx.emoji.text.EmojiCompat;
 import androidx.emoji.text.FontRequestEmojiCompatConfig;
 
 import com.test.test2app.qmoji.QmojiSelectView;
+import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.T;
 
 

@@ -29,7 +29,7 @@ public abstract class ExpandableRecyclerAdapter<A extends ExpandableViewHolder, 
     @NotNull
     @Override
     final public A onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
-        A expandableViewHolder = onCreateExpandableViewHolder(parent, viewType);
+        final A expandableViewHolder = onCreateExpandableViewHolder(parent, viewType);
         expandableViewHolder.setExpandListener(new ExpandableViewHolder.ExpandListener() {
             @Override
             public void expand(int position) {
@@ -42,8 +42,15 @@ public abstract class ExpandableRecyclerAdapter<A extends ExpandableViewHolder, 
             }
 
             @Override
-            public ExpandableEntry get(int position) {
-                return expandableEntries.get(position);
+            public boolean isExpand(int position) {
+                ExpandableEntry expandableEntry = expandableEntries.get(position);
+                return expandableEntry != null && expandableEntry.isParent() && expandableEntry.isExpand();
+            }
+
+            @Override
+            public boolean isExpandable(int position) {
+                ExpandableEntry expandableEntry = expandableEntries.get(position);
+                return expandableEntry != null && expandableEntry.isParent() && expandableEntry.isExpandable();
             }
         });
         return expandableViewHolder;
@@ -104,8 +111,11 @@ public abstract class ExpandableRecyclerAdapter<A extends ExpandableViewHolder, 
     private void expand(int position) {
         int subViewPosition = position + 1;
         ExpandableEntry expandableEntry = expandableEntries.get(position);
+        if (!expandableEntry.isExpandable()) {
+            return;
+        }
         for (int i = 0; i < expandableEntry.size(); i++) {
-            expandableEntries.add(subViewPosition + i, expandableEntry.getChild(i));
+            expandableEntries.add(subViewPosition + i, expandableEntry.getChildAt(i));
             notifyItemInserted(subViewPosition + i);
         }
         expandableEntry.setExpand(true);
@@ -119,6 +129,9 @@ public abstract class ExpandableRecyclerAdapter<A extends ExpandableViewHolder, 
     private void shrink(int position) {
         int subViewPosition = position + 1;
         ExpandableEntry expandableEntry = expandableEntries.get(position);
+        if (!expandableEntry.isExpandable()) {
+            return;
+        }
         for (int i = expandableEntry.size() - 1; i >= 0; i--) {
             expandableEntries.remove(subViewPosition + i);
             notifyItemRemoved(subViewPosition + i);

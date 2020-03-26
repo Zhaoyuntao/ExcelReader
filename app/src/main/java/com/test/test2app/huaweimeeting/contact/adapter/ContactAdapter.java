@@ -1,16 +1,15 @@
 package com.test.test2app.huaweimeeting.contact.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import com.test.test2app.R;
 import com.test.test2app.expandrecyclerview.ExpandableRecyclerAdapter;
 import com.test.test2app.huaweimeeting.contact.entry.ContactBaseEntry;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * created by zhaoyuntao
@@ -19,26 +18,41 @@ import java.util.List;
  */
 public class ContactAdapter extends ExpandableRecyclerAdapter<ContactHolder, ContactBaseEntry> {
 
-    private List<ContactBaseEntry> contactEntries;
-
     private OnItemClickListener onItemClickListener;
-
-    public ContactAdapter() {
-        contactEntries = new ArrayList<>();
-    }
 
     @Override
     public ContactHolder onCreateExpandableViewHolder(@NotNull ViewGroup parent, int viewType) {
         if (viewType == ContactBaseEntry.TYPE_TITLE) {
-            return new ContactHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_title_contact_list, parent, false));
+            return new ContactHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_conference_title_contact_list, parent, false));
         } else {
-            return new ContactHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_item_contact_list, parent, false));
+            return new ContactHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_conference_item_contact_list, parent, false));
         }
     }
 
     @Override
-    protected void onBindExpandableViewHolder(ContactHolder holder, int position, ContactBaseEntry contactEntry) {
+    protected void onBindExpandableViewHolder(ContactHolder holder, final int position, final ContactBaseEntry contactEntry) {
         holder.setText(contactEntry.getName());
+        if (onItemClickListener == null) {
+            return;
+        }
+        holder.setOnCallClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onCallClick(contactEntry);
+            }
+        });
+        holder.setOnVideoClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onVideoClick(contactEntry);
+            }
+        });
+        holder.setOnCheckChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                onItemClickListener.onCheckChange(contactEntry, isChecked);
+            }
+        });
     }
 
     @Override
@@ -51,7 +65,10 @@ public class ContactAdapter extends ExpandableRecyclerAdapter<ContactHolder, Con
     }
 
     public interface OnItemClickListener {
-        void onItemClick(ContactBaseEntry ContactBaseEntry, int position);
-    }
+        void onVideoClick(ContactBaseEntry ContactBaseEntry);
 
+        void onCallClick(ContactBaseEntry ContactBaseEntry);
+
+        void onCheckChange(ContactBaseEntry ContactBaseEntry, boolean isCheck);
+    }
 }

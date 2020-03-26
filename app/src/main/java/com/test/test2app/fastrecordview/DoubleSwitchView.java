@@ -1,18 +1,14 @@
 package com.test.test2app.fastrecordview;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
-
-import com.test.test2app.S;
-
 
 /**
  * created by zhaoyuntao
@@ -24,11 +20,15 @@ public class DoubleSwitchView extends FrameLayout {
 
     private View defaultView;
     private View secondView;
+    private int width, height;
 
     public static final int INDEX_DEFAULT = 0;
     public static final int INDEX_SECOND = 1;
     private ValueAnimator animator;
     private int index = INDEX_DEFAULT;
+
+    private LayoutParams layoutParamsDefault;
+    private LayoutParams layoutParamsSecond;
 
     public DoubleSwitchView(Context context) {
         super(context);
@@ -52,9 +52,7 @@ public class DoubleSwitchView extends FrameLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        int count = getChildCount();
-        S.s("init:"+count);
-        if (count >= 2) {
+        if (getChildCount() >= 2) {
             secondView = getChildAt(0);
             defaultView = getChildAt(1);
         }
@@ -62,7 +60,6 @@ public class DoubleSwitchView extends FrameLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        S.s("onMeasure");
         int w_max = MeasureSpec.getSize(widthMeasureSpec);
         int h_max = MeasureSpec.getSize(heightMeasureSpec);
         if (defaultView != null) {
@@ -72,11 +69,12 @@ public class DoubleSwitchView extends FrameLayout {
             measureChild(secondView, widthMeasureSpec, heightMeasureSpec);
         }
         setMeasuredDimension(w_max, h_max);
+        width = w_max;
+        height = h_max;
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        S.s("onLayout");
         super.onLayout(changed, left, top, right, bottom);
         if (defaultView != null) {
             int width = defaultView.getWidth();
@@ -139,12 +137,6 @@ public class DoubleSwitchView extends FrameLayout {
         startAnim();
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.drawColor(Color.BLACK);
-    }
-
     private void startAnim() {
         if (defaultView == null || secondView == null) {
             return;
@@ -154,24 +146,63 @@ public class DoubleSwitchView extends FrameLayout {
             animator = ValueAnimator.ofFloat(1000, 0);
             animator.setDuration(300);
             animator.setInterpolator(new DecelerateInterpolator());
+            animator.addListener(new Animator.AnimatorListener() {
+
+                @Override
+                public void onAnimationStart(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (getIndex() == INDEX_DEFAULT) {
+                        defaultView.setVisibility(VISIBLE);
+                        defaultView.setAlpha(1);
+                        layoutParamsDefault.width = width;
+                        layoutParamsDefault.height = height;
+                        defaultView.setLayoutParams(layoutParamsDefault);
+
+                        secondView.setVisibility(GONE);
+                        secondView.setAlpha(0);
+                        layoutParamsSecond.width = 0;
+                        layoutParamsSecond.height = 0;
+                        secondView.setLayoutParams(layoutParamsSecond);
+                    } else {
+                        defaultView.setVisibility(GONE);
+                        defaultView.setAlpha(0);
+                        layoutParamsDefault.width = 0;
+                        layoutParamsDefault.height = 0;
+                        defaultView.setLayoutParams(layoutParamsDefault);
+
+                        secondView.setVisibility(VISIBLE);
+                        secondView.setAlpha(1);
+                        layoutParamsSecond.width = width;
+                        layoutParamsSecond.height = height;
+                        secondView.setLayoutParams(layoutParamsSecond);
+                    }
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+
+                }
+            });
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                private LayoutParams layoutParamsDefault;
-                private LayoutParams layoutParamsSecond;
-                private float percentDisappear = 1;
-                private float percentAppear = 0;
-                private int widthOfChild;
-                private int heightOfChild;
 
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-
+                    float percentDisappear;
+                    float percentAppear;
+                    float value = (float) animation.getAnimatedValue();
                     if (layoutParamsDefault == null || layoutParamsSecond == null) {
                         layoutParamsDefault = (LayoutParams) defaultView.getLayoutParams();
                         layoutParamsSecond = (LayoutParams) secondView.getLayoutParams();
-                        widthOfChild = defaultView.getWidth();
-                        heightOfChild = defaultView.getHeight();
                     }
-                    float value = (float) animation.getAnimatedValue();
                     percentDisappear = value / 1000;
                     if (percentDisappear < 0.5) {
                         percentDisappear = 0;
@@ -184,8 +215,8 @@ public class DoubleSwitchView extends FrameLayout {
                     if (getIndex() == INDEX_SECOND) {
                         defaultView.setClickable(false);
                         secondView.setClickable(true);
-                        layoutParamsDefault.width = (int) (widthOfChild * percentDisappear);
-                        layoutParamsDefault.height = (int) (heightOfChild * percentDisappear);
+                        layoutParamsDefault.width = (int) (width * percentDisappear);
+                        layoutParamsDefault.height = (int) (height * percentDisappear);
                         defaultView.setLayoutParams(layoutParamsDefault);
                         defaultView.setAlpha(percentDisappear);
                         if (percentDisappear == 0) {
@@ -194,8 +225,8 @@ public class DoubleSwitchView extends FrameLayout {
                             defaultView.setVisibility(VISIBLE);
                         }
 
-                        layoutParamsSecond.width = (int) (widthOfChild * percentAppear);
-                        layoutParamsSecond.height = (int) (heightOfChild * percentAppear);
+                        layoutParamsSecond.width = (int) (width * percentAppear);
+                        layoutParamsSecond.height = (int) (height * percentAppear);
                         secondView.setLayoutParams(layoutParamsSecond);
                         secondView.setAlpha(percentAppear);
                         if (percentAppear == 0) {
@@ -206,8 +237,8 @@ public class DoubleSwitchView extends FrameLayout {
                     } else {
                         defaultView.setClickable(true);
                         secondView.setClickable(false);
-                        layoutParamsDefault.width = (int) (widthOfChild * percentAppear);
-                        layoutParamsDefault.height = (int) (heightOfChild * percentAppear);
+                        layoutParamsDefault.width = (int) (width * percentAppear);
+                        layoutParamsDefault.height = (int) (height * percentAppear);
                         defaultView.setLayoutParams(layoutParamsDefault);
                         defaultView.setAlpha(percentAppear);
                         if (percentAppear == 0) {
@@ -216,8 +247,8 @@ public class DoubleSwitchView extends FrameLayout {
                             defaultView.setVisibility(VISIBLE);
                         }
 
-                        layoutParamsSecond.width = (int) (widthOfChild * percentDisappear);
-                        layoutParamsSecond.height = (int) (heightOfChild * percentDisappear);
+                        layoutParamsSecond.width = (int) (width * percentDisappear);
+                        layoutParamsSecond.height = (int) (height * percentDisappear);
                         secondView.setLayoutParams(layoutParamsSecond);
                         secondView.setAlpha(percentDisappear);
                         if (percentDisappear == 0) {

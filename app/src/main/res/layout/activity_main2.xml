@@ -53,24 +53,12 @@
             android:id="@+id/button"
             android:layout_gravity="center"
             android:layout_width="40dp"
-            android:layout_height="40dp">
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_messages_delete"
-                android:background="#00000000"
-                android:scaleType="fitCenter"/>
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_voice_message_record"
-                android:background="#00000000"
-                android:scaleType="fitCenter"/>
-        </com.test.test2app.fastrecordview.DoubleSwitchView>
+            android:layout_height="40dp"/>
 
     </LinearLayout>
-    <com.test.test2app.fastrecordview.FastRecordView
+    <com.test.test2app.fastrecordview.AudioRecordView
         android:id="@+id/fastrecord"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

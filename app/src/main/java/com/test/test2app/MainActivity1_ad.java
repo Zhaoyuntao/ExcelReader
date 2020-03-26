@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.zhaoyuntao.androidutils.component.ZButton;
+import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.T;
 
 

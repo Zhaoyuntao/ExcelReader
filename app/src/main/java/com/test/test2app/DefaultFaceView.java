@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 
 import com.test.test2app.Hanzi2Pinyin;
 import com.test.test2app.utils.BitmapUtils;
+import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.TextMeasure;
 
 import java.util.Random;

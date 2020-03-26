@@ -16,7 +16,7 @@
 
 package com.test.test2app.bitmap;
 
-import com.test.test2app.S;
+import com.zhaoyuntao.androidutils.tools.S;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

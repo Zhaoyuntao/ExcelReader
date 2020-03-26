@@ -31,13 +31,13 @@ public class ConferenceAdapter extends ExpandableRecyclerAdapter<ConferenceHolde
             case ConferenceBaseItem.TYPE_ITEM_NOT_START:
             case ConferenceBaseItem.TYPE_ITEM_ONGOING:
             case ConferenceBaseItem.TYPE_ITEM_CLOSED:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_item_conference_list, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_conference_item_conference_list, parent, false);
                 break;
             case ConferenceBaseItem.TYPE_ITEM_DIVIDER:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_divider_list, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_conference_divider_list, parent, false);
                 break;
             case ConferenceBaseItem.TYPE_TITLE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_meeting_item_title_conference_list, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_huawei_conference_title_conference_list, parent, false);
                 break;
             default:
                 view = new View(parent.getContext());

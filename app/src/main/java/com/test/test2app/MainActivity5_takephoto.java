@@ -12,6 +12,7 @@ import com.test.test2app.utils.MusicPlayer;
 import com.test.test2app.utils.PermissionSettings;
 import com.test.test2app.utils.TakePictureUtils;
 import com.zhaoyuntao.androidutils.component.ZButton;
+import com.zhaoyuntao.androidutils.tools.S;
 
 import java.util.List;
 import java.util.UUID;
