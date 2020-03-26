@@ -36,10 +36,12 @@ public class ZTabLayout extends View {
     private List<Item> items = new ArrayList<>();
     private int positionNow;
     private int colorOfTab;
+    private int colorOfText;
     private PaintFlagsDrawFilter paintFlagsDrawFilter;
     private int widthOfItem;
     private ZPagerView zPagerView;
     private int heightOfScrollBar;
+    private boolean fullTab;
 
     public ZTabLayout(Context context) {
         super(context);
@@ -65,12 +67,15 @@ public class ZTabLayout extends View {
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ZTabLayout);
             colorOfTab = typedArray.getColor(R.styleable.ZTabLayout_ztab_color, Color.BLACK);
+            colorOfText = typedArray.getColor(R.styleable.ZTabLayout_ztab_textcolor, Color.BLACK);
+            fullTab = typedArray.getBoolean(R.styleable.ZTabLayout_ztab_fulltab, false);
             typedArray.recycle();
         } else {
             colorOfTab = Color.BLACK;
+            colorOfText = Color.BLACK;
         }
         paintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
-        heightOfScrollBar=BitmapUtils.dip2px(getContext(),2);
+        heightOfScrollBar = BitmapUtils.dip2px(getContext(), 2);
     }
 
     @Override
@@ -78,6 +83,9 @@ public class ZTabLayout extends View {
         super.draw(canvas);
         int width = getWidth();
         int height = getHeight();
+        if (fullTab) {
+            heightOfScrollBar = height;
+        }
         int count = items.size();
         Resources resources = getResources();
         if (width == 0 || height == 0 || count == 0 || resources == null) {
@@ -94,7 +102,8 @@ public class ZTabLayout extends View {
                 continue;
             }
             float textSize = B.dip2px(getContext(), item.getTextSizeDp());
-            paint.setColor(item.hasColorRes() ? resources.getColor(item.getColorNormalResId()) : item.getColorNormal());
+//            paint.setColor(item.hasColorRes() ? resources.getColor(item.getColorNormalResId()) : item.getColorNormal());
+            paint.setColor(colorOfText);
             paint.setTextSize(textSize);
             paint.setTypeface(item.getTypeface());
 
@@ -109,7 +118,7 @@ public class ZTabLayout extends View {
         canvas.save();
         paint.setColor(colorOfTab);
         RectF rect = new RectF();
-        rect.set(positionNow, getHeight()-getPaddingTop()- heightOfScrollBar, positionNow + widthOfItem, getHeight() - getPaddingBottom());
+        rect.set(positionNow, getHeight() - getPaddingTop() - heightOfScrollBar, positionNow + widthOfItem, getHeight() - getPaddingBottom());
         canvas.drawRect(rect, paint);
         Path path = new Path();
         path.addRect(rect, Path.Direction.CCW);
@@ -120,7 +129,7 @@ public class ZTabLayout extends View {
                 continue;
             }
             float textSize = B.dip2px(getContext(), item.getTextSizeDp());
-            paint.setColor(item.hasColorRes() ? resources.getColor(item.getColorSelectedResId()) : item.getColorNormal());
+            paint.setColor(item.hasColorRes() ? resources.getColor(item.getColorSelectedResId()) : item.getColorSelected());
             paint.setTextSize(textSize);
             paint.setTypeface(item.getTypeface());
 

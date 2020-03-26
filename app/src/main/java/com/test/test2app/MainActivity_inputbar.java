@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.zhaoyuntao.androidutils.tools.B;
+import com.zhaoyuntao.androidutils.tools.S;
 
 public class MainActivity_inputbar extends AppCompatActivity {
 

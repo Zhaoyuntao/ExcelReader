@@ -27,10 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zhaoyuntao.androidutils.tools.B;
-
-import emojicon.EmojiconEditText;
-import emojicon.EmojiconTextView;
+import com.zhaoyuntao.androidutils.tools.S;
 
 
 public class MainActivity8_permission extends AppCompatActivity {

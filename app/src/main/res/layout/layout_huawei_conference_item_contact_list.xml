@@ -28,14 +28,14 @@
         android:textSize="17sp" />
 
     <ImageButton
-        android:id="@+id/button1"
+        android:id="@+id/video"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:background="@drawable/yc_mtrl_profile_video"
         android:scaleType="center" />
 
     <ImageButton
-        android:id="@+id/button2"
+        android:id="@+id/call"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="20dp"
@@ -43,7 +43,7 @@
         android:scaleType="center" />
 
     <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/create_group_checkbox"
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

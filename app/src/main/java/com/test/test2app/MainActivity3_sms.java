@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import com.test.test2app.BaseActivity;
 import com.test.test2app.R;
-import com.test.test2app.S;
 import com.test.test2app.smsview.PhoneNumberDivider;
 import com.test.test2app.smsview.PhoneNumberView;
 import com.test.test2app.smsview.VerificationCodeView;
+import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.T;
-import com.zhaoyuntao.androidutils.tools.ZThread;
+import com.zhaoyuntao.androidutils.tools.thread.ZThread;
 
 public class MainActivity3_sms extends BaseActivity {
 

@@ -12,20 +12,20 @@ import java.util.List;
 public class ExpandableEntry<A> {
     private boolean expand;
     private boolean isParent = true;
-    private int position;
+    private boolean expandable = true;
     private List<ExpandableEntry> list = new ArrayList<>();
 
     private A a;
 
-    public<B extends A> ExpandableEntry(B b) {
+    public <B extends A> ExpandableEntry(B b) {
         this.a = b;
     }
 
-    public boolean isParent() {
+    boolean isParent() {
         return isParent;
     }
 
-    public boolean isExpand() {
+    boolean isExpand() {
         return expand;
     }
 
@@ -33,19 +33,19 @@ public class ExpandableEntry<A> {
         this.expand = expand;
     }
 
-    public int getPosition() {
-        return position;
+    public boolean isExpandable() {
+        return expandable;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setExpandable(boolean expandable) {
+        this.expandable = expandable;
     }
 
-    public int size() {
+    int size() {
         return list.size();
     }
 
-    public List<ExpandableEntry> getAll() {
+    List<ExpandableEntry> getAll() {
         List<ExpandableEntry> list = new ArrayList<>();
         list.add(this);
         if (expand) {
@@ -54,23 +54,15 @@ public class ExpandableEntry<A> {
         return list;
     }
 
-    public List<ExpandableEntry> getAllChild() {
-        if (expand) {
-            return list;
-        } else {
-            return new ArrayList<>();
-        }
-    }
-
-    public ExpandableEntry getChild(int i) {
+    ExpandableEntry getChildAt(int i) {
         return list.get(i);
     }
 
-    public A getParamEntry() {
+    A getParamEntry() {
         return a;
     }
 
-    public <B> void addParamEntry(B a) {
+    public <B> void addChildEntry(B a) {
         ExpandableEntry<B> expandableEntry = new ExpandableEntry<>(a);
         list.add(expandableEntry);
         this.isParent = true;

@@ -12,7 +12,7 @@ import android.provider.MediaStore;
 import androidx.core.content.FileProvider;
 
 import com.test.test2app.MyContentProvider;
-import com.test.test2app.S;
+import com.zhaoyuntao.androidutils.tools.S;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,6 +1,7 @@
 package com.test.test2app.fastrecordview
 
-import com.test.test2app.S
+import com.zhaoyuntao.androidutils.tools.S
+
 
 /**
  * created by zhaoyuntao

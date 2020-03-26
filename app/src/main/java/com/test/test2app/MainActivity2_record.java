@@ -11,10 +11,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.test.test2app.fastrecordview.AudioRecordView;
 import com.test.test2app.fastrecordview.DoubleSwitchView;
-import com.test.test2app.fastrecordview.FastRecordView;
 import com.test.test2app.fastrecordview.ZImageButton;
 import com.zhaoyuntao.androidutils.tools.B;
+import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.T;
 
 import java.util.ArrayList;
@@ -23,9 +24,8 @@ import java.util.List;
 public class MainActivity2_record extends BaseActivity {
 
     DoubleSwitchView changeIconButton;
-    FastRecordView fastRecordView;
+    AudioRecordView audioRecordView;
     ListView listView;
-    FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,106 +66,71 @@ public class MainActivity2_record extends BaseActivity {
         findViewById(R.id.testclose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                fastRecordView.stopRecord();
+//                audioRecordView.stopRecord();
                 changeIconButton.nextIndex();
             }
         });
 
-        fastRecordView = findViewById(R.id.fastrecord);
-        fastRecordView.setAutoUpdateDuration(true);
+        audioRecordView = findViewById(R.id.fastrecord);
+        audioRecordView.setAutoUpdateTime(true);
 
         changeIconButton = findViewById(R.id.button);
         changeIconButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                T.t(activity(), "click");
+                S.s("click");
             }
         });
+        ZImageButton imageButton = new ZImageButton(this);
+        imageButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageButton.setImageResource(R.drawable.ic_voice_message_record);
+        ImageButton imageButton2 = new ImageButton(this);
+        imageButton2.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        imageButton2.setImageResource(R.drawable.ic_messages_delete);
+        changeIconButton.setDefaultView(imageButton);
+        changeIconButton.setSecondView(imageButton2);
 
-        ImageButton imageButton1 = new ImageButton(this);
-        ZImageButton imageButton2 = new ZImageButton(this);
 
-        imageButton1.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageButton2.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageButton.setTouchConnection(audioRecordView);
 
-        imageButton1.setImageResource(R.drawable.ic_messages_delete);
-        imageButton2.setImageResource(R.drawable.ic_voice_message_record);
-
-        int padding = B.dip2px(this, 5);
-
-        imageButton1.setPaddingRelative(padding, padding, padding, padding);
-        imageButton2.setPaddingRelative(padding, padding, padding, padding);
-
-//        changeIconButton.setDefaultView(imageButton1);
-//        changeIconButton.setSecondView(imageButton2);
-
-        imageButton1.setBackground(null);
-        imageButton2.setBackground(null);
-
-        imageButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                T.t(MainActivity2_record.this,"delete click");
-            }
-        });
-        imageButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                T.t(MainActivity2_record.this,"record click");
-            }
-        });
-
-        imageButton1.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                T.t(MainActivity2_record.this,"delete long click");
-                return true;
-            }
-        });
-        imageButton2.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                T.t(MainActivity2_record.this,"record long click");
-                return false;
-            }
-        });
-
-        imageButton2.setTouchConnection(fastRecordView);
-
-        fastRecordView.setCallBack(new FastRecordView.CallBack() {
+        audioRecordView.setCallBack(new AudioRecordView.CallBack() {
             @Override
             public void whenStartRecord() {
-                T.t(activity(), "started");
+                S.s("started");
             }
 
             @Override
             public void whenStopRecord(boolean needSend) {
-                T.t(activity(), "stopped");
+                S.s("stopped --------");
+                if (needSend) {
+                    audioRecordView.showSendAndDeleteBar();
+                }
             }
 
             @Override
             public void whenCancelRecord() {
-                T.t(activity(), "canceled");
+                S.s("canceled --------");
             }
 
             @Override
             public void whenSendClick() {
-                T.t(activity(), "sent");
+                S.s("sent");
             }
 
             @Override
             public void whenActionDown() {
-
+                S.s("down");
             }
 
             @Override
             public void whenActionUp() {
-
+                S.s("up");
             }
 
             @Override
             public void whenAbandonedVoice() {
-                T.t(activity(), "abandoned");
+                S.s("abandoned ---");
             }
         });
     }

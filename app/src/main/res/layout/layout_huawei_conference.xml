@@ -18,8 +18,7 @@
     <com.test.test2app.pagerview.ZTabLayout
         android:id="@+id/ztab"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:ztab_color="@color/black" />
+        android:layout_height="48dp"/>
 
     <ImageView
         android:layout_width="match_parent"

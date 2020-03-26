@@ -26,14 +26,10 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
     }
 
     final public void initExpandState(int position) {
-        if (!isExpandable()) {
+        if (!expandListener.isExpandable(position)) {
             return;
         }
-        ExpandableEntry expandableEntry = expandListener.get(position);
-        if (expandableEntry == null || !expandableEntry.isParent()) {
-            return;
-        }
-        if (expandableEntry.isExpand()) {
+        if (expandListener.isExpand(position)) {
             onExpand();
         } else {
             onShrink();
@@ -41,14 +37,10 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
     }
 
     final public void changeExpandState(int position) {
-        if (!isExpandable()) {
+        if (!expandListener.isExpandable(position)) {
             return;
         }
-        ExpandableEntry expandableEntry = expandListener.get(position);
-        if (!expandableEntry.isParent()) {
-            return;
-        }
-        if (expandableEntry.isExpand()) {
+        if (expandListener.isExpand(position)) {
             onShrink();
             expandListener.shrink(position);
         } else {
@@ -59,10 +51,6 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
 
     public boolean onClick(View v) {
         return false;
-    }
-
-    protected boolean isExpandable() {
-        return true;
     }
 
     protected void onExpand() {
@@ -81,6 +69,8 @@ public abstract class ExpandableViewHolder extends RecyclerView.ViewHolder {
 
         void shrink(int position);
 
-        ExpandableEntry get(int position);
+        boolean isExpand(int position);
+
+        boolean isExpandable(int position);
     }
 }

@@ -1,8 +1,12 @@
 package com.test.test2app.huaweimeeting.contact.adapter;
 
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatCheckBox;
 
 import com.test.test2app.R;
 import com.test.test2app.expandrecyclerview.ExpandableViewHolder;
@@ -15,11 +19,17 @@ import com.test.test2app.expandrecyclerview.ExpandableViewHolder;
 public class ContactHolder extends ExpandableViewHolder {
     private TextView textView;
     private ImageView imageView;
+    private ImageButton call;
+    private ImageButton video;
+    private AppCompatCheckBox appCompatCheckBox;
 
     public ContactHolder(final View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.title);
         imageView = itemView.findViewById(R.id.imageview);
+        call = itemView.findViewById(R.id.call);
+        video = itemView.findViewById(R.id.video);
+        appCompatCheckBox = itemView.findViewById(R.id.checkbox);
     }
 
     @Override
@@ -45,4 +55,24 @@ public class ContactHolder extends ExpandableViewHolder {
         textView.setText(text);
     }
 
+    public void setOnCallClickListener(View.OnClickListener onCallClickListener) {
+        if (call == null) {
+            return;
+        }
+        call.setOnClickListener(onCallClickListener);
+    }
+
+    public void setOnVideoClickListener(View.OnClickListener onVideoClickListener) {
+        if (video == null) {
+            return;
+        }
+        video.setOnClickListener(onVideoClickListener);
+    }
+
+    public void setOnCheckChangeListener(CompoundButton.OnCheckedChangeListener onCheckedChangeListener) {
+        if (appCompatCheckBox == null) {
+            return;
+        }
+        appCompatCheckBox.setOnCheckedChangeListener(onCheckedChangeListener);
+    }
 }
