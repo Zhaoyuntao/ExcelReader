@@ -15,12 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".appbase.ZApplication"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity91_Qmoji"></activity>
-        <activity android:name=".MainActivity92_huawei_meeting">
+        <activity android:name=".MainActivity93_threadPool">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".MainActivity9_openGL"></activity>
+        <activity android:name=".MainActivity91_Qmoji" />
+        <activity android:name=".MainActivity92_huawei_meeting"></activity>
+        <activity android:name=".MainActivity9_openGL" />
         <activity android:name=".MainActivity8_permission" />
         <activity android:name=".MainActivity7_recyclerView" />
         <activity android:name=".MainActivity6_pay" />
@@ -28,11 +34,6 @@
         <activity android:name=".MainActivity4_grouptips" />
         <activity android:name=".MainActivity3_sms" />
         <activity android:name=".MainActivity2_record">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity_inputbar"
