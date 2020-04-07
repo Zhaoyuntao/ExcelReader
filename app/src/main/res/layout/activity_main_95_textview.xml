@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/red"
+    android:padding="30dp"
+    tools:context=".activity.MainActivity_95_textview">
+
+    <com.test.test2app.textview.ZTestTextView
+        android:id="@+id/text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#ffffff"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+</FrameLayout>
