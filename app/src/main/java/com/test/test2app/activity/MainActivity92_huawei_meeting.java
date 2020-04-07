@@ -1,4 +1,4 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.test.test2app.BaseActivity;
+import com.test.test2app.R;
 import com.test.test2app.huaweimeeting.conference.entry.ConferenceBaseItem;
 import com.test.test2app.huaweimeeting.conference.adapter.ConferenceAdapter;
 import com.test.test2app.huaweimeeting.conference.entry.ConferenceEntry;

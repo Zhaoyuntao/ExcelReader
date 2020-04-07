@@ -1,8 +1,10 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.test.test2app.R;
 
 public class MainActivity9_openGL extends AppCompatActivity {
 

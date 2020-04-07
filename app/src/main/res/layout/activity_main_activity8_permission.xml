@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity8_permission">
+    tools:context=".activity.MainActivity8_permission">
 
     <Button
         android:id="@+id/permission"

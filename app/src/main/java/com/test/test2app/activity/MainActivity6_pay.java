@@ -1,9 +1,10 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.test.test2app.R;
 import com.test.test2app.pay.PaymentCell;
 
 public class MainActivity6_pay extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.test.test2app.BaseActivity;
+import com.test.test2app.R;
 import com.test.test2app.fastrecordview.AudioRecordView;
 import com.test.test2app.fastrecordview.DoubleSwitchView;
 import com.test.test2app.fastrecordview.ZImageButton;

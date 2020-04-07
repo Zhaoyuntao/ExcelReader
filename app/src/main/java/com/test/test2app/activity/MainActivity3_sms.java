@@ -1,4 +1,4 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -7,7 +7,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,14 +18,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.util.Linkify;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.test.test2app.R;
 import com.zhaoyuntao.androidutils.tools.S;
 
 

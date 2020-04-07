@@ -1,36 +1,23 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.LocaleList;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.test.test2app.BaseActivity;
+import com.test.test2app.R;
+import com.test.test2app.textview.ConversationTextView;
 import com.zhaoyuntao.androidutils.component.ZButton;
 import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.T;
@@ -53,8 +40,8 @@ public class MainActivity1_ad extends BaseActivity {
 
         listview = findViewById(R.id.listview);
 
-        final ZTextView zTextView = findViewById(R.id.ztextview);
-        final ZTextView zTextView2 = findViewById(R.id.ztextview2);
+        final ConversationTextView conversationTextView = findViewById(R.id.ztextview);
+        final ConversationTextView conversationTextView2 = findViewById(R.id.ztextview2);
 
 
         final TextView textViewContent = new TextView(this);
@@ -63,8 +50,8 @@ public class MainActivity1_ad extends BaseActivity {
         textView.setText("12:01");
         textView.setTextSize(19);
 
-        zTextView.setTailView(textView);
-        zTextView.setContentView(textViewContent);
+        conversationTextView.setTailView(textView);
+        conversationTextView.setContentView(textViewContent);
 
         final TextView textView2Content = new TextView(this);
         textView2Content.setTextSize(23);
@@ -72,8 +59,8 @@ public class MainActivity1_ad extends BaseActivity {
         textView2.setText("12:01");
         textView2.setTextSize(19);
 
-        zTextView2.setTailView(textView2);
-        zTextView2.setContentView(textView2Content);
+        conversationTextView2.setTailView(textView2);
+        conversationTextView2.setContentView(textView2Content);
 
         EditText editText = findViewById(R.id.edit);
         editText.addTextChangedListener(new TextWatcher() {

@@ -12,7 +12,9 @@ import android.provider.MediaStore;
 import androidx.core.content.FileProvider;
 
 import com.test.test2app.MyContentProvider;
+import com.zhaoyuntao.androidutils.permission.PermissionSettings;
 import com.zhaoyuntao.androidutils.tools.S;
+import com.zhaoyuntao.androidutils.tools.ZP;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,7 +43,7 @@ public class TakePictureUtils {
         if (photoGetter == null) {
             return;
         }
-        PermissionUtils.requestCameraPermission(activity, new PermissionUtils.RequestResult() {
+        ZP.requestCameraPermission(activity, new ZP.RequestResult() {
             @Override
             public void onGranted(List<String> permissions) {
                 _takePhoto(activity, photoGetter);
