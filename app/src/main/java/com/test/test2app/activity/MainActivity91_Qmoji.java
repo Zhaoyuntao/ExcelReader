@@ -1,4 +1,4 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 
 import android.content.res.Resources;
@@ -12,6 +12,8 @@ import androidx.core.provider.FontRequest;
 import androidx.emoji.text.EmojiCompat;
 import androidx.emoji.text.FontRequestEmojiCompatConfig;
 
+import com.test.test2app.BaseActivity;
+import com.test.test2app.R;
 import com.test.test2app.qmoji.QmojiSelectView;
 import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.T;

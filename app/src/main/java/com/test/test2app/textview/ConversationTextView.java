@@ -1,4 +1,4 @@
-package com.test.test2app;
+package com.test.test2app.textview;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -20,7 +20,7 @@ import com.zhaoyuntao.androidutils.tools.B;
 import java.util.Locale;
 
 
-public class ZTextView extends FrameLayout {
+public class ConversationTextView extends FrameLayout {
 
     private View contentView;
     private View tailView;
@@ -33,18 +33,18 @@ public class ZTextView extends FrameLayout {
 
     private int w_space;
 
-    public ZTextView(@NonNull Context context) {
+    public ConversationTextView(@NonNull Context context) {
         super(context);
         init();
     }
 
 
-    public ZTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public ConversationTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public ZTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ConversationTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

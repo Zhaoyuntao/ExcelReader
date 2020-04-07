@@ -1,4 +1,4 @@
-package com.test.test2app;
+package com.test.test2app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,15 +7,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import com.test.test2app.DefaultFaceView;
+import com.test.test2app.R;
 import com.test.test2app.bitmap.BitmapMemoryCache;
-import com.test.test2app.utils.MusicPlayer;
-import com.test.test2app.utils.PermissionSettings;
 import com.test.test2app.utils.TakePictureUtils;
 import com.zhaoyuntao.androidutils.component.ZButton;
+import com.zhaoyuntao.androidutils.permission.PermissionSettings;
 import com.zhaoyuntao.androidutils.tools.S;
 
 import java.util.List;
-import java.util.UUID;
 
 public class MainActivity5_takephoto extends AppCompatActivity {
 
