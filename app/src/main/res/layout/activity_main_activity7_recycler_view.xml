@@ -4,10 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity7_recyclerView"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity7_recyclerView">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/country_code_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="10dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="#ff9999"
+
+        android:gravity="center_vertical">
+
+
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/textview2"
+            android:background="#99ff99"
+            android:ellipsize="end"
+            android:singleLine="true"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@+id/textview2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#9999ff"
+            android:singleLine="true"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/textview1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp" />
 </LinearLayout>

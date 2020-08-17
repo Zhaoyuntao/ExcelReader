@@ -1,4 +1,4 @@
-package com.test.test2app.fastrecordview;
+package com.test.test2app.fastrecordviewnew;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -10,22 +10,23 @@ import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.Nullable;
 
 import com.test.test2app.R;
-import com.test.test2app.fastrecordviewnew.TouchEvent;
+import com.test.test2app.interpolator.BounceInterpolator;
+import com.test.test2app.interpolator.ZLoopThread;
 import com.test.test2app.utils.BitmapUtils;
 import com.test.test2app.utils.VibratorUtil;
+import com.zhaoyuntao.androidutils.tools.S;
 import com.zhaoyuntao.androidutils.tools.TextMeasure;
-
 
 /**
  * created by zhaoyuntao
@@ -33,7 +34,7 @@ import com.zhaoyuntao.androidutils.tools.TextMeasure;
  * description:
  * the main part of audio record view, include a clickable circle and a lock area.
  */
-public class AudioRecordView extends View implements TouchEvent, UserOperations {
+public class AudioRecordView extends View implements TouchEvent {
 
 
     //------- circle part
@@ -85,8 +86,7 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
     private float x_press, y_press;
 
     //callback
-    private OprationEvent userOperations;
-    private FastRecordView.CallBack callBack;
+    private CallBack callBack;
     //canceledByHand by InputActionView
     private boolean canceledByHand;
 
@@ -135,16 +135,19 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
     public AudioRecordView(Context context) {
         super(context);
         init();
+        init2();
     }
 
     public AudioRecordView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
+        init2();
     }
 
     public AudioRecordView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
+        init2();
     }
 
     @Override
@@ -152,14 +155,16 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
         float x = event.getX();
         float y = event.getY();
         if (lockedRecord) {
+            S.s("lock");
             int left_Pause = x_lock;
             int right_Pause = x_lock + w_lock;
             int top_Pause = y_lock;
             int bottom_Pause = y_lock + h_lock;
             if (x >= left_Pause && x <= right_Pause && y >= top_Pause && y <= bottom_Pause) {
+                S.s("stop");
                 stopRecord(true, false);
-                return true;
             } else if (Math.pow(x - x_circle, 2) + Math.pow(y - y_circle, 2) < Math.pow(radius, 2)) {
+                S.s("stop2");
                 stopRecord(true, true);
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
@@ -171,9 +176,30 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
                         postInvalidate();
                         break;
                 }
-                return true;
             }
+
+            int left_Pause2 = x_cancelTouch;
+            int right_Pause2 = x_cancelTouch + w_cancelTouch;
+            int top_Pause2 = y_cancelTouch;
+            int bottom_Pause2 = y_cancelTouch + h_cancelTouch;
+            long time_now = System.currentTimeMillis();
+
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    time_down = time_now;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    long during = time_now - time_down;
+                    if (during <= 200) {
+                        if (x >= left_Pause2 && x <= right_Pause2 && y >= top_Pause2 && y <= bottom_Pause2) {
+                            cancelRecord();
+                        }
+                    }
+                    break;
+            }
+            return true;
         } else if (waitSend) {
+            S.s("wait send");
             int left = x_rect_waitSend;
             int right = left + w_rect_waitSend;
             int top = y_rect_waitSend;
@@ -181,15 +207,20 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
             //position in wait send rect
             if (x >= left && x <= right && y >= top && y <= bottom) {
                 if (x >= left_delete && x <= right_delete && y >= top_delete && y <= bottom_delete) {
+                    S.s("click delete");
                     startWaitSendDisappearAnim();
                     abandonedVoice();
                 } else if (x >= left_send && x <= right_send && y >= top_send && y <= bottom_send) {
+                    S.s("click send");
                     startWaitSendDisappearAnim();
                     sendVoice();
                 }
                 return true;
             }
         }
+
+        //------------
+
         return super.onTouchEvent(event);
     }
 
@@ -303,12 +334,203 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
             y_rect_waitSend = h_view;
         }
 
-        setMeasuredDimension(w_max, h_max);
+        //---------------------------------------------
+        int padding_start = getPaddingLeft();
+
+        w_rect_back = w_max - w_tail;
+
+        x_start = w_max - w_tail;
+        int y_start = h_max - h_rect_back;
+
+        x_rect = x_start;
+        y_rect = y_start;
+
+        x_start_cancelTouch = padding_start + (w_max - w_cancelTouch) / 2;
+//        x_start_cancelTouch = padding_start + marginX_start_during + w_during + marginX_end_during;
+
+        float y_start_cancelTouch = y_rect + (h_rect_back - h_cancelTouch) / 2;
+        y_end_cancelTouch = y_start_cancelTouch + h_cancelTouch;
+
+        y_text1_cancelTouch_start = y_cancelTouch + (h_cancelTouch - h_text1_cancel) / 2 + h_text1_cancel;
+        y_text2_cancelTouch_start = y_cancelTouch + (h_cancelTouch - h_text2_cancel) / 2 + h_text2_cancel;
+        y_bitmap_cancelTouch_start = y_cancelTouch + (h_cancelTouch - h_bitmap_cancelTouch) / 2;
+
+        calculateAllPosition();
+//        setMeasuredDimension(w_rect_back, h_max);
+
+        setMeasuredDimension(w_max, h_max);//UiUtils.dipToPx(getContext(),48));
+    }
+
+    private void calculateAllPosition() {
+        alpha_all = (int) (255 * percent_position);
+        alpha_cancelTouch = (int) (255 * percent_position);
+        //parent position
+        x_rect = (int) (x_start - w_rect_back * percent_position);
+
+        //during position
+        x_during = x_rect + marginX_start_during;
+        y_during = y_rect + (h_rect_back - h_during) / 2;
+
+        //cancel touch position
+//        x_cancelTouch = x_during + w_during + marginX_end_during + distance_move_x;
+        x_cancelTouch = (int) (x_rect + x_start_cancelTouch + distance_move_x);
+        y_cancelTouch = y_rect + (h_rect_back - h_cancelTouch) / 2;
+
+        x_redPoint = (int) (x_rect + (marginX_start_during - radius_redPoint * 2) / 2 + radius_redPoint);
+        y_redPoint = (int) (y_rect + (h_rect_back - radius_redPoint * 2) / 2 + radius_redPoint);
+
+        y_text1_cancelTouch = y_cancelTouch + (h_cancelTouch - h_text1_cancel) / 2 + h_text1_cancel;
+        S.s("y:"+y_text1_cancelTouch);
+        y_text2_cancelTouch = y_cancelTouch + (h_cancelTouch - h_text2_cancel) / 2 + h_text2_cancel;
+        y_bitmap_cancelTouch = y_cancelTouch + (h_cancelTouch - h_bitmap_cancelTouch) / 2;
+    }
+
+    private void calculateAllPosition2() {
+        alpha_all = (int) (255 * percent_position);
+        alpha_cancelTouch = 0;
+        //parent position
+        x_rect = (int) (x_start - w_rect_back * percent_position);
+
+        //during position
+        x_during = x_rect + marginX_start_during;
+        y_during = y_rect + (h_rect_back - h_during) / 2;
+
+        //cancel touch position
+//        x_cancelTouch = x_during + w_during + marginX_end_during + distance_move_x;
+        x_cancelTouch = (int) (x_rect + x_start_cancelTouch + distance_move_x);
+        y_cancelTouch = y_rect + (h_rect_back - h_cancelTouch) / 2;
+
+        x_redPoint = (int) (x_rect + (marginX_start_during - radius_redPoint * 2) / 2 + radius_redPoint);
+        y_redPoint = (int) (y_rect + (h_rect_back - radius_redPoint * 2) / 2 + radius_redPoint);
+
+        y_text1_cancelTouch = y_cancelTouch + (h_cancelTouch - h_text1_cancel) / 2 + h_text1_cancel;
+        S.s("y:"+y_text1_cancelTouch);
+        y_text2_cancelTouch = y_cancelTouch + (h_cancelTouch - h_text2_cancel) / 2 + h_text2_cancel;
+        y_bitmap_cancelTouch = y_cancelTouch + (h_cancelTouch - h_bitmap_cancelTouch) / 2;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.setDrawFilter(paintFlagsDrawFilter);
+
+        //----------
+        //-------------- background
+        paint.setColor(color_back);
+        paint.setAlpha(alpha_all);
+        Rect rect = new Rect();
+        int left_rect = (int) x_rect;
+        int top_rect = y_rect;
+        int right_rect = left_rect + w_rect_back;
+        int bottom_rect = top_rect + h_rect_back;
+        rect.set(left_rect, top_rect, right_rect, bottom_rect);
+        canvas.drawRect(rect, paint);
+
+        //-------------- cancel touch
+        Rect rectCancelTouch = new Rect();
+        paint.setColor(color_back_cancel);
+        int left_cancel = x_cancelTouch;
+        int top_cancel = y_cancelTouch;
+        int right_cancel = left_cancel + w_cancelTouch;
+        int bottom_cancel = top_cancel + h_cancelTouch;
+        rectCancelTouch.set(left_cancel, top_cancel, right_cancel, bottom_cancel);
+        paint.setAlpha(alpha_cancelTouch);
+        canvas.drawRect(rectCancelTouch, paint);
+        paint.setAlpha(alpha_all);
+        //------------- debug:test click area
+//        if (S.DEBUG) {
+//            Rect rectDebug = new Rect();
+//            int left_Pause = x_cancelTouch;
+//            int right_Pause = x_cancelTouch + w_cancelTouch;
+//            int top_Pause = y_cancelTouch;
+//            int bottom_Pause = y_cancelTouch + h_cancelTouch;
+//            rectDebug.set(left_Pause, top_Pause, right_Pause, bottom_Pause);
+//            paint.setColor(Color.RED);
+//            canvas.drawRect(rectDebug, paint);
+//        }
+        //-------------- cancel text2: CANCEL
+        String cancelString2 = this.cancelString2;
+        if (!TextUtils.isEmpty(cancelString2)) {
+            paint.setTextSize(textSize_cancel2);
+            paint.setColor(color_text_cancel2);
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
+            paint.setAlpha(alpha_cancelTouch2);
+            float x_text2_cancelTouch = x_cancelTouch + (w_cancelTouch - w_text2_cancel) / 2;
+            canvas.drawText(cancelString2, x_text2_cancelTouch, y_text2_cancelTouch, paint);
+        }
+        //-------------- cancel icon: arrow
+        paint.setAlpha(alpha_cancelTouch);
+        Rect rect_cancel_icon_src = new Rect();
+        int left_cancel_icon_src = 0;
+        int top_cancel_icon_src = 0;
+        int right_cancel_icon_src = bitmap_cancelTouch.getWidth();
+        int bottom_cancel_icon_src = bitmap_cancelTouch.getHeight();
+        rect_cancel_icon_src.set(left_cancel_icon_src, top_cancel_icon_src, right_cancel_icon_src, bottom_cancel_icon_src);
+        Rect rect_cancel_icon_des = new Rect();
+        int left_cancel_icon = (int) (x_rect + w_rect_back - w_text1_cancel - margin_circle_cancelTouch - w_cancelTouch_icon - margin_icon_cancelTouch + distance_move_x);
+        ;
+        int top_cancel_icon = (int) (y_bitmap_cancelTouch);
+        int right_cancel_icon = left_cancel_icon + w_cancelTouch_icon;
+        int bottom_cancel_icon = top_cancel_icon + h_bitmap_cancelTouch;
+        rect_cancel_icon_des.set(left_cancel_icon, top_cancel_icon, right_cancel_icon, bottom_cancel_icon);
+        canvas.drawBitmap(bitmap_cancelTouch, rect_cancel_icon_src, rect_cancel_icon_des, paint);
+//        if (S.DEBUG) {
+//            //debug rect
+//            paint.setColor(Color.RED);
+//            paint.setAlpha(alpha_cancelTouch);
+//            paint.setStyle(Paint.Style.STROKE);
+//            canvas.drawRect(rect_cancel_icon_des, paint);
+//            paint.setStyle(Paint.Style.FILL);
+//        }
+        //-------------- cancel text: SLIDE TO CANCEL
+        String cancelString1 = this.cancelString1;
+        if (!TextUtils.isEmpty(cancelString1)) {
+            paint.setTextSize(textSize_cancel1);
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
+            paint.setColor(color_text_cancel1);
+            paint.setAlpha(alpha_cancelTouch);
+            float x_text1_cancelTouch = x_rect + w_rect_back - w_text1_cancel - margin_circle_cancelTouch + distance_move_x;
+            canvas.drawText(cancelString1, x_text1_cancelTouch, y_text1_cancelTouch, paint);
+
+        }
+
+        //-------------- during circle
+        paint.setColor(color_redPoint);
+        paint.setAlpha(alpha_redPoint);
+        canvas.drawCircle(x_redPoint, y_redPoint, radius_redPoint, paint);
+        paint.setAlpha(alpha_all);
+
+        //-------------- during time background
+        paint.setColor(color_back_during);
+        paint.setAlpha(alpha_all);
+        Rect rectDuring = new Rect();
+        int left_during = x_during;
+        int top_during = y_during;
+        int right_during = left_during + w_during;
+        int bottom_during = top_during + h_during;
+        rectDuring.set(left_during, top_during, right_during, bottom_during);
+        canvas.drawRect(rectDuring, paint);
+
+        //-------------- during time
+        String during = timeString;
+        if (!TextUtils.isEmpty(during)) {
+            paint.setTextSize(textSize_during);
+            paint.setColor(color_text_during);
+            paint.setTypeface(Typeface.DEFAULT);
+            paint.setAlpha(alpha_all);
+            float x_text = x_during + ((rectDuring.right - rectDuring.left) - w_text_during) / 2;
+            float y_text = y_during + ((rectDuring.bottom - rectDuring.top) - h_text_during) / 2 + h_text_during;
+            canvas.drawText(during, x_text, y_text, paint);
+        }
+//        if (S.DEBUG) {
+//            //-------------- debug line
+//            paint.setColor(Color.BLACK);
+//            paint.setAlpha(255);
+//            paint.setStrokeWidth(1);
+//            float x_line = w_rect_back - distance_move_x_max;
+//            canvas.drawLine(x_line, 0, x_line, canvas.getHeight(), paint);
+//        }
+
+        //---------------------------------------------------------------
         //------------ hide button in the back
         Rect rect_hide = new Rect();
         int left_hide = (int) (x_start_circle - w_hide);
@@ -527,6 +749,8 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
             float y_duration = y_rect_waitSend + (h_rect_waitSend - h_duration) / 2f + h_duration;
             canvas.drawText(text_during, x_duration, y_duration, paint);
         }
+
+
     }
 
     /**
@@ -542,6 +766,9 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
                     float distance = (float) animation.getAnimatedValue();
+                    if (distance > 900) {
+                        distance = 1000;
+                    }
                     float percent = distance / 1000;
                     alphaForAll = (int) (255 * percent);
                     if (alphaForAll < 100) {
@@ -551,6 +778,9 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
                     }
                     radius = radius_circle_max * percent;
                     y_lock = (int) (y_start_lock - (y_start_lock - y_end_lock) * percent);
+
+                    percent_position = percent;
+                    calculateAllPosition();
                     postInvalidate();
                 }
             });
@@ -570,6 +800,7 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
         }
         isRecording = false;
         stopAppearAnim();
+        stopCircleAnim();
         if (animator_disappear == null) {
             animator_disappear = ValueAnimator.ofFloat(1000, 0);
             animator_disappear.setDuration(200);
@@ -595,6 +826,16 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
                     } else {
                         y_lock = (int) (y_start_lock - (y_start_lock - y_end_lock) * percent);
                     }
+
+
+                    percent_position = percent;
+                    if (percent_position < 0.1) {
+                        percent_position = 0;
+                    }
+                    alpha_all = (int) (255 * percent_position);
+                    alpha_redPoint = (int) (255 * percent_position);
+                    calculateAllPosition2();
+
                     postInvalidate();
                 }
             });
@@ -607,6 +848,8 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     lockedRecord = false;
+
+                    resetAllState();
                 }
 
                 @Override
@@ -645,6 +888,22 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
                     distance_move_y *= percent;
                     y_circle = y_start_circle + distance_move_y;
                     y_lock = (int) (y_circle - radius_circle_max - h_lock - margin_c_l_vertical);
+
+
+                    if (isRecording) {
+                        x_cancelTouch = (int) (x_start_cancelTouch + distance_move_x * percent);
+                        y_text1_cancelTouch = (int) (y_text1_cancelTouch_start + (y_end_cancelTouch - y_bitmap_cancelTouch_start) * (1 - percent));
+                        S.s("y:"+y_text1_cancelTouch);
+                        y_bitmap_cancelTouch = (int) (y_bitmap_cancelTouch_start + (y_end_cancelTouch - y_bitmap_cancelTouch_start) * (1 - percent));
+                        y_text2_cancelTouch = (int) (y_text2_cancelTouch_start - (y_end_cancelTouch - y_text2_cancelTouch_start) * percent);
+                        alpha_cancelTouch = (int) (255 * percent);
+                        alpha_cancelTouch2 = (int) (255 * (1 - percent));
+                    } else {
+                        x_cancelTouch = (int) x_start_cancelTouch;
+                        alpha_cancelTouch = 0;
+                        alpha_cancelTouch2 = 0;
+                    }
+
                     postInvalidate();
                 }
             });
@@ -744,11 +1003,13 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
     }
 
     @Override
-    public void destroyDrawingCache() {
+    protected void onDetachedFromWindow() {
         stopDisappearAnim();
         stopAppearAnim();
         stopLockAnim();
-        super.destroyDrawingCache();
+        //-------
+        stopCircleAnim();
+        super.onDetachedFromWindow();
     }
 
     private void resetAllState() {
@@ -756,11 +1017,12 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
         alphaForAll = 0;
         showWaitSend = false;
         lockedRecord = false;
-        postInvalidate();
-    }
 
-    private boolean isAnimatorRunning() {
-        return (animator_lock != null && animator_lock.isRunning()) || (animator_appear != null && animator_appear.isRunning()) || (animator_disappear != null && animator_disappear.isRunning());
+        //----------
+        timeString = timeStringDefault;
+        percent_position = 0;
+        calculateAllPosition();
+        postInvalidate();
     }
 
     private void appear() {
@@ -774,23 +1036,32 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
 
         VibratorUtil.vibrate(getContext());
 
-        startAppearAnim();
-        if (userOperations != null) {
-            userOperations.whenAppear();
-        }
+
+        //------
+        x_rect = 0;
+        distance_move_x = 0;
+        alpha_all = 255;
+        alpha_cancelTouch = 255;
+        alpha_cancelTouch2 = 0;
+        startCircleAnim();
 
         waitSend = false;
+
         if (callBack != null) {
             callBack.whenStartRecord();
         }
+
+
+        startAppearAnim();
+        postInvalidate();
     }
 
     protected void stopRecord(boolean callEventBack, boolean needSend) {
+        S.sd("stop record");
         startDisappearAnim();
         if (callEventBack) {
-            if (userOperations != null) {
-                userOperations.whenStopRecord();
-            }
+            stopRecord(false);
+            postInvalidate();
         }
         if (needSend) {
             waitSend = false;
@@ -803,7 +1074,12 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
     private void cancelRecord() {
         waitSend = false;
         canceledByHand = true;
+        lockedRecord = false;
+        distance_move_x = 0;
+
+        //--------
         startDisappearAnim();
+
         if (callBack != null) {
             callBack.whenCancelRecord();
         }
@@ -812,9 +1088,6 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
     private void lockRecord() {
         lockedRecord = true;
         startLockAnim();
-        if (userOperations != null) {
-            userOperations.whenLockRecord();
-        }
     }
 
     @Override
@@ -823,6 +1096,7 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
             callBack.whenActionDown();
         }
     }
+
     @Override
     public void whenActionUp() {
         if (callBack != null) {
@@ -890,36 +1164,21 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
             float distance_move_x_tmp = event.getX() - x_press;
             //forbid move right,only allow move left
             if (distance_move_x_tmp < 0) {
-                if (userOperations != null) {
-                    userOperations.moveLeft(distance_move_x_tmp);
+                if (Math.abs(distance_move_x_tmp) < distance_move_x_max) {
+                    distance_move_x = (int) distance_move_x_tmp;
+                    //cancel touch position
+                    x_cancelTouch = (int) (x_start_cancelTouch + distance_move_x);
+                    float percent = 1 - Math.abs(distance_move_x_tmp) / distance_move_x_max;
+                    alpha_cancelTouch = (int) (255 * percent);
+                } else {
+                    cancelRecord();
                 }
             }
-            postInvalidate();
         }
+        postInvalidate();
     }
 
-    protected void setUserOperations(OprationEvent userOperations) {
-        this.userOperations = userOperations;
-    }
-
-    @Override
-    public void whenCanceled() {
-        cancelRecord();
-    }
-
-    @Override
-    public void whenStopRecord() {
-        stopRecord(false, false);
-    }
-
-    @Override
-    public void whenTimeUpdate(String timeString) {
-        if (!waitSend) {
-            this.textOfDuration = timeString;
-        }
-    }
-
-    public void setCallBack(FastRecordView.CallBack callBack) {
+    public void setCallBack(CallBack callBack) {
         this.callBack = callBack;
     }
 
@@ -927,4 +1186,278 @@ public class AudioRecordView extends View implements TouchEvent, UserOperations 
         return isRecording;
     }
 
+
+    ///---------------------------------------------------- inputActionView
+    private String timeString;
+    private String timeStringDefault;
+    private String cancelString1;
+    private String cancelString2;
+
+    private int w_rect_back, h_rect_back;
+    private int w_tail;
+    private int x_rect, y_rect;
+    private int x_start;
+
+    private int x_cancelTouch, y_cancelTouch;
+    private float y_text1_cancelTouch;
+    private float y_text2_cancelTouch;
+    private float y_bitmap_cancelTouch;
+    private float y_text1_cancelTouch_start, y_text2_cancelTouch_start, y_bitmap_cancelTouch_start;
+    private int w_cancelTouch, h_cancelTouch;
+    private int w_cancelTouch_icon, h_bitmap_cancelTouch;
+
+    private int x_during, y_during;
+    private int w_during, h_during;
+
+    //start when start record
+    private ValueAnimator animator_circle;
+
+    private int distance_move_x_max;
+    private int distance_move_x;
+
+    private int marginX_start_during;
+    private float x_start_cancelTouch;
+    private float y_end_cancelTouch;
+
+    //red point
+    private int x_redPoint, y_redPoint;
+    private float radius_redPoint;
+
+    private float textSize_during;
+    private float textSize_cancel1;
+    private float textSize_cancel2;
+
+    private int alpha_cancelTouch;
+    private int alpha_cancelTouch2;
+    private int alpha_redPoint;
+    private int alpha_all;
+
+    private long time_startTimer;
+
+    private ZLoopThread loopThread;
+    private float w_text_during, h_text_during;
+    private float w_text1_cancel, h_text1_cancel;
+    private float w_text2_cancel, h_text2_cancel;
+
+    private int color_redPoint;
+    private int color_back;
+    private int color_back_during;
+    private int color_text_during;
+    private int color_text_cancel1;
+    private int color_text_cancel2;
+    private int color_back_cancel;
+
+    private Bitmap bitmap_cancelTouch;
+    private float percent_position;
+
+    private String duration_formation;
+
+    private boolean autoUpdateTime;
+
+    //press time
+    private long time_down;
+
+    private int margin_circle_cancelTouch;
+    private int margin_icon_cancelTouch;
+
+    private void init2() {
+        setWillNotDraw(false);
+
+        timeStringDefault = getContext().getResources().getString(R.string.string_fastrecord_duration_default);
+        timeString = timeStringDefault;
+        cancelString1 = getContext().getResources().getString(R.string.string_fastrecord_cancel1);
+        cancelString2 = getContext().getResources().getString(R.string.string_fastrecord_cancel2);
+        duration_formation = getContext().getResources().getString(R.string.string_fastrecord_duration_formation);
+
+        alpha_cancelTouch = 255;
+        alpha_all = 255;
+        alpha_redPoint = 0;
+
+        distance_move_x_max = BitmapUtils.dip2px(getContext(), 80);
+        h_rect_back = BitmapUtils.dip2px(getContext(), 48);
+        w_tail = (int) (h_rect_back * 0.8f);
+
+        //margin of during
+        marginX_start_during = BitmapUtils.dip2px(getContext(), 40);
+
+        //size of touch cancel
+        w_cancelTouch = BitmapUtils.dip2px(getContext(), 130);
+        h_cancelTouch = BitmapUtils.dip2px(getContext(), 40);
+
+        radius_redPoint = BitmapUtils.dip2px(getContext(), 5);
+
+        textSize_during = BitmapUtils.sp2px(getContext(), 15);
+        textSize_cancel1 = BitmapUtils.sp2px(getContext(), 13);
+        textSize_cancel2 = BitmapUtils.sp2px(getContext(), 16);
+
+        float[] textWH_during = TextMeasure.measure(timeString, textSize_during);
+
+        w_text_during = textWH_during[0];
+        h_text_during = textWH_during[1];
+
+        w_during = (int) w_text_during;
+        h_during = BitmapUtils.dip2px(getContext(), 40);
+
+        float[] textWH_cancelString1 = TextMeasure.measure(cancelString1, textSize_cancel1);
+
+        w_text1_cancel = textWH_cancelString1[0];
+        h_text1_cancel = textWH_cancelString1[1];
+
+        float[] textWH_cancelString2 = TextMeasure.measure(cancelString2, textSize_cancel2);
+
+        w_text2_cancel = textWH_cancelString2[0];
+        h_text2_cancel = textWH_cancelString2[1];
+
+        color_redPoint = Color.RED;
+        color_back = Color.WHITE;
+        color_back_during = Color.WHITE;
+        color_text_during = Color.argb(100, 0, 0, 0);
+
+        color_back_cancel = Color.WHITE;
+        color_text_cancel1 = getContext().getResources().getColor(R.color.yc_color_808080_CMG);
+        color_text_cancel2 = getContext().getResources().getColor(R.color.yc_color_4378F2_CPN);
+
+        //paint and canvas
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
+
+        bitmap_cancelTouch = BitmapUtils.getBitmapById(getContext(), R.drawable.ic_arrow_left);
+
+        h_bitmap_cancelTouch = (int) (h_cancelTouch * 0.5f);
+
+        int w_bitmap = bitmap_cancelTouch.getWidth();
+        int h_bitmap = bitmap_cancelTouch.getHeight();
+
+        float propertion_bitmap_cancelTouch = (float) w_bitmap / h_bitmap;
+        w_cancelTouch_icon = (int) (h_bitmap_cancelTouch * propertion_bitmap_cancelTouch);
+
+        margin_circle_cancelTouch = BitmapUtils.dip2px(getContext(), 36);
+        margin_icon_cancelTouch = BitmapUtils.dip2px(getContext(), 5);
+    }
+
+    public void startTimer() {
+        if (autoUpdateTime) {
+            closeTimer();
+            loopThread = new ZLoopThread(100) {
+                @Override
+                protected void init() {
+                    time_startTimer = System.currentTimeMillis();
+                }
+
+                @Override
+                protected void todo() {
+                    long now = System.currentTimeMillis();
+                    long duration = now - time_startTimer;
+
+                    duration = duration >= 0 ? duration : 0;
+                    long mills = duration % 1000 / 10;
+                    long seconds = duration / 1000 % 60;
+                    long minutes = duration / 1000 / 60;
+
+                    String millString = String.format(LanguageUtils.getApplyLocale(), "%02d", mills);
+                    String secondString = String.format(LanguageUtils.getApplyLocale(), "%02d", seconds);
+                    String minuteString = String.format(LanguageUtils.getApplyLocale(), "%02d", minutes);
+
+                    setTimeString(String.format(LanguageUtils.getApplyLocale(), duration_formation, minuteString, secondString, millString));
+
+                    postInvalidate();
+                }
+            };
+            loopThread.start();
+        }
+    }
+
+    public void restartTimer() {
+        startTimer();
+    }
+
+    private void closeTimer() {
+        if (loopThread != null) {
+            loopThread.close();
+        }
+    }
+
+    private void startCircleAnim() {
+//        startTimer();
+        if (animator_circle == null) {
+            animator_circle = ValueAnimator.ofFloat(0, 1000);
+            animator_circle.setDuration(500);
+            animator_circle.setRepeatCount(ValueAnimator.INFINITE);
+            animator_circle.setRepeatMode(ValueAnimator.REVERSE);
+            animator_circle.setInterpolator(new BounceInterpolator());
+            animator_circle.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float distance = (float) animation.getAnimatedValue();
+                    float percent = distance / 1000;
+                    alpha_redPoint = (int) (255 * percent);
+                    postInvalidate();
+                }
+            });
+
+        }
+        if (!animator_circle.isRunning()) {
+            animator_circle.start();
+        }
+    }
+
+    public void updateTime(long duration) {
+        if (autoUpdateTime) {
+            return;
+        }
+        long mills = duration % 1000 / 10;
+        long seconds = duration / 1000 % 60;
+        long minutes = duration / 1000 / 60;
+        String millString = String.format(LanguageUtils.getApplyLocale(), "%02d", mills);
+        String secondString = String.format(LanguageUtils.getApplyLocale(), "%02d", seconds);
+        String minuteString = String.format(LanguageUtils.getApplyLocale(), "%02d", minutes);
+        setTimeString(String.format(LanguageUtils.getApplyLocale(), duration_formation, minuteString, secondString, millString));
+    }
+
+    private void stopCircleAnim() {
+        if (animator_circle != null && animator_circle.isRunning()) {
+            animator_circle.cancel();
+            animator_circle.end();
+        }
+        closeTimer();
+    }
+
+    private void stopRecord(boolean callBack) {
+        lockedRecord = false;
+        distance_move_x = 0;
+        startDisappearAnim();
+        if (callBack) {
+            stopRecord(false, false);
+        }
+        postInvalidate();
+    }
+
+    private void setTimeString(String timeString) {
+        this.timeString = timeString;
+        if (!waitSend) {
+            this.textOfDuration = timeString;
+        }
+        postInvalidate();
+    }
+
+    public void setAutoUpdateTime(boolean autoUpdateTime) {
+        this.autoUpdateTime = autoUpdateTime;
+    }
+
+    public interface CallBack {
+        void whenStartRecord();
+
+        void whenStopRecord(boolean needSend);
+
+        void whenCancelRecord();
+
+        void whenAbandonedVoice();
+
+        void whenSendClick();
+
+        void whenActionDown();
+
+        void whenActionUp();
+    }
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.test2app.R;
+import com.zhaoyuntao.androidutils.tools.S;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class CountryCodeAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+        S.s("onBindViewHolder");
         final CountryCodeBean countryCodeBean = mList.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +56,12 @@ public class CountryCodeAdapter extends RecyclerView.Adapter {
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.countryCodeIcon.setImageResource(countryCodeBean.getDrawableId());
         viewHolder.countryCodeName.setText(countryCodeBean.getCountryName());
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, @NonNull List payloads) {
+        S.s("onBindViewHolder2");
+        super.onBindViewHolder(holder, position, payloads);
     }
 
     @Override

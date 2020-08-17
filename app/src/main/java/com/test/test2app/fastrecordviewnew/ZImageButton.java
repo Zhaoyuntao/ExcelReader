@@ -1,12 +1,10 @@
-package com.test.test2app.fastrecordview;
+package com.test.test2app.fastrecordviewnew;
 
 import android.content.Context;
 import android.view.MotionEvent;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
-
-import com.zhaoyuntao.androidutils.tools.S;
 
 /**
  * created by zhaoyuntao

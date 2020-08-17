@@ -1,4 +1,4 @@
-package com.test.test2app.fastrecordview;
+package com.test.test2app.fastrecordviewnew;
 
 import java.util.Locale;
 
@@ -7,7 +7,7 @@ import java.util.Locale;
  * on 2019-12-15
  * description:
  */
-class LanguageUtils {
+public class LanguageUtils {
 
     public static Locale getApplyLocale() {
         return Locale.ENGLISH;

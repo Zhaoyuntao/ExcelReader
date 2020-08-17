@@ -15,10 +15,9 @@ import com.test.test2app.BaseActivity;
 import com.test.test2app.R;
 import com.test.test2app.fastrecordview.AudioRecordView;
 import com.test.test2app.fastrecordview.DoubleSwitchView;
-import com.test.test2app.fastrecordview.ZImageButton;
-import com.zhaoyuntao.androidutils.tools.B;
+import com.test.test2app.fastrecordview.FastRecordView;
+import com.test.test2app.fastrecordviewnew.ZImageButton;
 import com.zhaoyuntao.androidutils.tools.S;
-import com.zhaoyuntao.androidutils.tools.T;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,7 @@ public class MainActivity2_record extends BaseActivity {
 
     DoubleSwitchView changeIconButton;
     AudioRecordView audioRecordView;
+    FastRecordView fastRecordView;
     ListView listView;
 
     @Override
@@ -73,8 +73,9 @@ public class MainActivity2_record extends BaseActivity {
             }
         });
 
-        audioRecordView = findViewById(R.id.fastrecord);
-        audioRecordView.setAutoUpdateTime(true);
+//        audioRecordView = findViewById(R.id.fastrecord);
+        fastRecordView = findViewById(R.id.fastrecord);
+//        audioRecordView.setAutoUpdateTime(true);
 
         changeIconButton = findViewById(R.id.button);
         changeIconButton.setOnClickListener(new View.OnClickListener() {
@@ -94,47 +95,47 @@ public class MainActivity2_record extends BaseActivity {
         changeIconButton.setSecondView(imageButton2);
 
 
-        imageButton.setTouchConnection(audioRecordView);
+        imageButton.setTouchConnection(fastRecordView);
 
-        audioRecordView.setCallBack(new AudioRecordView.CallBack() {
-            @Override
-            public void whenStartRecord() {
-                S.s("started");
-            }
-
-            @Override
-            public void whenStopRecord(boolean needSend) {
-                S.s("stopped --------");
-                if (needSend) {
-                    audioRecordView.showSendAndDeleteBar();
-                }
-            }
-
-            @Override
-            public void whenCancelRecord() {
-                S.s("canceled --------");
-            }
-
-            @Override
-            public void whenSendClick() {
-                S.s("sent");
-            }
-
-            @Override
-            public void whenActionDown() {
-                S.s("down");
-            }
-
-            @Override
-            public void whenActionUp() {
-                S.s("up");
-            }
-
-            @Override
-            public void whenAbandonedVoice() {
-                S.s("abandoned ---");
-            }
-        });
+//        audioRecordView.seztCallBack(new AudioRecordView.CallBack() {
+//            @Override
+//            public void whenStartRecord() {
+//                S.s("started");
+//            }
+//
+//            @Override
+//            public void whenStopRecord(boolean needSend) {
+//                S.s("stopped --------");
+//                if (needSend) {
+//                    audioRecordView.showSendAndDeleteBar();
+//                }
+//            }
+//
+//            @Override
+//            public void whenCancelRecord() {
+//                S.s("canceled --------");
+//            }
+//
+//            @Override
+//            public void whenSendClick() {
+//                S.s("sent");
+//            }
+//
+//            @Override
+//            public void whenActionDown() {
+//                S.s("down");
+//            }
+//
+//            @Override
+//            public void whenActionUp() {
+//                S.s("up");
+//            }
+//
+//            @Override
+//            public void whenAbandonedVoice() {
+//                S.s("abandoned ---");
+//            }
+//        })
     }
 
 }

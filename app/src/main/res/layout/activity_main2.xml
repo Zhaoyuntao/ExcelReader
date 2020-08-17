@@ -56,7 +56,7 @@
             android:layout_height="40dp"/>
 
     </LinearLayout>
-    <com.test.test2app.fastrecordview.AudioRecordView
+    <com.test.test2app.fastrecordview.FastRecordView
         android:id="@+id/fastrecord"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
