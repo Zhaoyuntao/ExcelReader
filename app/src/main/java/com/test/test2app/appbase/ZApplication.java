@@ -2,6 +2,7 @@ package com.test.test2app.appbase;
 
 import android.app.Application;
 
+import com.test.test2app.fastrecordviewnew.UiUtils;
 import com.test.test2app.threadpool.Utilities;
 
 /**
@@ -15,5 +16,6 @@ public class ZApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Utilities.setContext(this.getApplicationContext());
+        UiUtils.application = this;
     }
 }

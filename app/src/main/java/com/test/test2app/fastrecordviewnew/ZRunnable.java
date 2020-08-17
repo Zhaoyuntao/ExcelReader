@@ -1,4 +1,4 @@
-package com.test.test2app.fastrecordview;
+package com.test.test2app.fastrecordviewnew;
 
 import android.app.Activity;
 import android.content.Context;

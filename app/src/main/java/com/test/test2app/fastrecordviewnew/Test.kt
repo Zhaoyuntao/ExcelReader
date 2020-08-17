@@ -1,4 +1,4 @@
-package com.test.test2app.fastrecordview
+package com.test.test2app.fastrecordviewnew
 
 import com.zhaoyuntao.androidutils.tools.S
 

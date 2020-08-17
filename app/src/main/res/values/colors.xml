@@ -53,20 +53,74 @@
     <color name="yc_color_4378F2_CPN_10">#1E4378F2</color>
     <color name="yc_color_275edb_CPP">#275edb</color>
 
-    <color name="color_default_face_0_start">#FFCE70</color>
-    <color name="color_default_face_0_end">#FFA95D</color>
+    <!--  Main Color  -->
+    <color name="color_main_blue_275edb">#275edb</color>
+    <color name="color_main_blue_80275edb">#80275edb</color>
+    <color name="color_main_blue_dark">#173eab</color>
+    <color name="color_main_blue_dark_99275edb">#99275edb</color>
+    <color name="color_main_blue_light_800092FF">#800092FF</color>
+    <color name="color_main_blue_light_00b4ff">#00b4ff</color>
+    <color name="color_main_blue_light_55aaaaff">#55aaaaff</color>
+    <color name="color_main_blue_light_2">#aaaaff</color>
+    <color name="color_main_blue_light_3">#fafaff</color>
+    <color name="color_main_red_e4281d">#e4281d</color>
+    <color name="color_main_orange_db5e27">#db5e27</color>
+    <color name="color_main_orange_ff732e">#ff732e</color>
+    <color name="color_main_orange_80ff732e">#80ff732e</color>
+    <color name="color_main_orange_dark_db5e27">#99db5e27</color>
+    <!--  Bubble Color  -->
+    <color name="color_bubble_me">#d9e4fc</color>
+    <color name="color_bubble_other">#f2f2f7</color>
+    <color name="color_bubble_me_high_light">#ebebff</color>
+    <color name="color_bubble_other_high_light">#cccccc</color>
 
-    <color name="color_default_face_1_start">#84B1FF</color>
-    <color name="color_default_face_1_end">#7385FE</color>
+    <!--  White  -->
+    <color name="color_main_white_ffffff">#ffffff</color>
+    <color name="color_main_white_f0f0f0">#f0f0f0</color>
+    <color name="color_main_white_e0e0e0">#e0e0e0</color>
+    <color name="color_main_white_cccccc">#cccccc</color>
+    <color name="color_main_white_b0b0b0">#b0b0b0</color>
+    <color name="color_main_white_808080">#808080</color>
+    <color name="color_main_white_efefef">#efefef</color>
+    <color name="color_main_white_f8f8f8">#f8f8f8</color>
 
-    <color name="color_default_face_2_start">#6FD4FC</color>
-    <color name="color_default_face_2_end">#4EAFF3</color>
+    <!--  Text Color  -->
+    <color name="color_text_e0e0e0">#e0e0e0</color>
+    <color name="color_text_808080">#808080</color>
+    <color name="color_text_414141">#414141</color>
+    <color name="color_text_4b4b4b">#4b4b4b</color>
+    <color name="color_text_262626">#262626</color>
+    <color name="color_text_141414">#141414</color>
+    <color name="color_text_e4281d">#e4281d</color>
 
-    <color name="color_default_face_3_start">#FB794C</color>
-    <color name="color_default_face_3_end">#FE586F</color>
+    <!--  Black  -->
+    <color name="color_main_black_12">#1F000000</color>
+    <color name="color_main_black_20">#33000000</color>
+    <color name="color_main_black_26">#42000000</color>
+    <color name="color_main_black_30">#4D000000</color>
+    <color name="color_main_black_35">#59000000</color>
+    <color name="color_main_black_40">#66000000</color>
+    <color name="color_main_black_50">#80000000</color>
+    <color name="color_main_black_60">#99000000</color>
+    <color name="color_main_black_70">#B2000000</color>
+    <color name="color_main_black_000000">#000000</color>
+    <color name="color_main_black_979797">#979797</color>
+    <color name="color_main_black_EFEFF4">#EFEFF4</color>
 
-    <color name="color_default_face_4_start">#93DF6A</color>
-    <color name="color_default_face_4_end">#69D27A</color>
+
+    <!--  default face  #6B71DB, #C06BD8, #CD4E39, #00AD96, #F6AB0F -->
+    <color name="color_default_face_0_start">#6B71DB</color>
+    <color name="color_default_face_0_end">#6B71DB</color>
+    <color name="color_default_face_1_start">#C06BD8</color>
+    <color name="color_default_face_1_end">#C06BD8</color>
+    <color name="color_default_face_2_start">#CD4E39</color>
+    <color name="color_default_face_2_end">#CD4E39</color>
+    <color name="color_default_face_3_start">#00AD96</color>
+    <color name="color_default_face_3_end">#00AD96</color>
+    <color name="color_default_face_4_start">#F6AB0F</color>
+    <color name="color_default_face_4_end">#F6AB0F</color>
+
+    <color name="color_transparent">#00000000</color>
 
     <color name="yc_color_FFFA00">#FFFA00</color>
     <color name="yc_color_000000_CB">#000000</color>
