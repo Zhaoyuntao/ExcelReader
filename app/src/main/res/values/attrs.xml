@@ -15,7 +15,8 @@
   -->
 
 <resources>
-    <declare-styleable name="EmojiconTextView">
+    <declare-styleable name="BlueTextView">
+        <attr name="maxLines" format="integer" />
         <attr name="emojiconSize" format="dimension"/>
         <attr name="rtlSupport" format="boolean"/>
         <attr name="emojiconAlignment" format="enum">

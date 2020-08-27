@@ -17,33 +17,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.MainActivity_95_textview">
-
-        </activity>
-        <activity
-            android:name=".activity.MainActivity_94_wallpaper"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity android:name=".activity.MainActivity93_threadPool"></activity>
-        <activity android:name=".activity.MainActivity91_Qmoji" />
-        <activity android:name=".activity.MainActivity92_huawei_meeting" />
-        <activity android:name=".activity.MainActivity9_openGL" />
-        <activity android:name=".activity.MainActivity8_permission" />
-        <activity android:name=".activity.MainActivity7_recyclerView" >
+        <activity android:name=".activity.MainActivity_97_textview_spannable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.MainActivity_95_textview"></activity>
+        <activity
+            android:name=".activity.MainActivity_94_wallpaper"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".activity.MainActivity93_threadPool" />
+        <activity android:name=".activity.MainActivity91_Qmoji" />
+        <activity android:name=".activity.MainActivity92_huawei_meeting" />
+        <activity android:name=".activity.MainActivity9_openGL" />
+        <activity android:name=".activity.MainActivity8_permission" />
+        <activity android:name=".activity.MainActivity7_recyclerView">
+
+        </activity>
         <activity android:name=".activity.MainActivity6_pay" />
         <activity android:name=".activity.MainActivity5_takephoto" />
         <activity android:name=".activity.MainActivity4_grouptips" />
         <activity android:name=".activity.MainActivity3_sms" />
         <activity android:name=".activity.MainActivity2_record" />
-        <activity android:name=".activity.MainActivity_96_faceview" >
-
-        </activity>
+        <activity android:name=".activity.MainActivity_96_faceview"></activity>
         <activity
             android:name=".MainActivity_inputbar"
             android:windowSoftInputMode="adjustPan" />
