@@ -4,6 +4,7 @@
     <bytecodeTargetLevel>
       <module name="diffComparator" target="1.7" />
       <module name="excelReader" target="1.7" />
+      <module name="MyJava" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

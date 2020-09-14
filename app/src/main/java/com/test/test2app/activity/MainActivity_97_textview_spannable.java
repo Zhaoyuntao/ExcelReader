@@ -1,5 +1,7 @@
 package com.test.test2app.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -15,20 +17,22 @@ public class MainActivity_97_textview_spannable extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_textview_spannable);
-
+        final String scheme="matrx://meeting?meetingId=abcd&meetingPassword=abcde";
         BlueTextView textView=findViewById(R.id.textview);
-        textView.setUrlSpanClickListener(new BlueTextView.UrlSpanClickListener() {
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view, String url, String content) {
-                Toast.makeText(activity(),"hello",Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(scheme));
+                startActivity(intent);
             }
         });
-        textView.setText("123www.baidu.com123" +
-                "\uD83E\uDD7A\uD83D\uDC69\u200D❤️\u200D\uD83D\uDC8B\u200D\uD83D\uDC68 " +
-                "www.google.com182" +
-                "10597531"+
-                "http:www.baidu.com"+
-                "http://www.baidu.com");
+//        textView.setText("123www.baidu.com123" +
+//                "\uD83E\uDD7A\uD83D\uDC69\u200D❤️\u200D\uD83D\uDC8B\u200D\uD83D\uDC68 " +
+//                "www.google.com182" +
+//                "10597531"+
+//                "http:www.baidu.com"+
+//                "http://www.baidu.com");
+        textView.setText(scheme);
 ////        textView.setMovementMethod(LinkMovementMethod.getInstance());
 //        TextView useInfo = (TextView) findViewById(R.id.textview);
 //        String url_0_text = "用户协议及隐私条款";
