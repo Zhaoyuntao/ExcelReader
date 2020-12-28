@@ -15,6 +15,7 @@ import com.zhaoyuntao.androidutils.component.ZButton;
 import com.zhaoyuntao.androidutils.permission.PermissionSettings;
 import com.zhaoyuntao.androidutils.tools.S;
 
+import java.io.File;
 import java.util.List;
 
 public class MainActivity5_takephoto extends AppCompatActivity {
@@ -38,11 +39,11 @@ public class MainActivity5_takephoto extends AppCompatActivity {
         zButton_click = findViewById(R.id.click);
         zButton_click2 = findViewById(R.id.click2);
         zButton_photo = findViewById(R.id.photo);
-        faceImageView1=findViewById(R.id.face1);
-        faceImageView2=findViewById(R.id.face2);
-        faceImageView3=findViewById(R.id.face3);
-        faceImageView4=findViewById(R.id.face4);
-        faceImageView5=findViewById(R.id.face5);
+        faceImageView1 = findViewById(R.id.face1);
+        faceImageView2 = findViewById(R.id.face2);
+        faceImageView3 = findViewById(R.id.face3);
+        faceImageView4 = findViewById(R.id.face4);
+        faceImageView5 = findViewById(R.id.face5);
 
         faceImageView1.setName("Bsadsad");
         faceImageView2.setName("Zfgafdggdfdsf");
@@ -56,13 +57,19 @@ public class MainActivity5_takephoto extends AppCompatActivity {
             public void onClick(View v) {
                 S.s("111");
                 TakePictureUtils.takePhoto(MainActivity5_takephoto.this, new TakePictureUtils.PhotoGetter() {
+                    private double percent;
+                    private final long sizeMax = (long) (2 * 1024 * 1024);
+
                     @Override
                     public void whenGetPhoto(String absolutePath, Uri uri, Bitmap bitmap) {
-                        Bitmap compressBitmap = TakePictureUtils.getCompressBitmap(MainActivity5_takephoto.this, uri, (long) (2 * 1024 * 1024));
+                        File file = new File(absolutePath);
+                        S.s("file size:[" + file.length() + "] | [" + S.formatNumber((double) file.length() / 2014 / 1024, "#.##") + " Mb]");
+                        Bitmap compressBitmap = TakePictureUtils.getCompressBitmap(MainActivity5_takephoto.this, uri, sizeMax);
+                        percent = (double) file.length() / sizeMax;
                         zButton_photo.setDrawable_back(compressBitmap);
-                        S.s("comp:" + compressBitmap.getAllocationByteCount());
+                        S.s("max:[" + sizeMax + " | " + S.formatNumber((double) sizeMax / 2014 / 2014, "#.##") + " Mb] compress:[" + compressBitmap.getAllocationByteCount() + " | " + S.formatNumber((double) compressBitmap.getAllocationByteCount() / 1024 / 1024, "#.##") + " Mb] percent:[" + percent + "]");
                         bitmapMemoryCache.put(absolutePath, compressBitmap);
-                        S.s("size:" + bitmapMemoryCache.size());
+//                        S.s("size:" + bitmapMemoryCache.size());
                     }
 
                     @Override

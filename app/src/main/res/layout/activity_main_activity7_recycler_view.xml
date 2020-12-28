@@ -10,7 +10,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/country_code_list"
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"

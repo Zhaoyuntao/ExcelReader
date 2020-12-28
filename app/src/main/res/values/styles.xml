@@ -9,11 +9,11 @@
     </style>
 
     <style name="zbutton_bottom">
-        <item name="textcolor">#000000</item>
-        <item name="w_space">20dp</item>
-        <item name="percent_bitmap_center">0.6</item>
+        <item name="ZButton_textcolor">#000000</item>
+        <item name="ZButton_w_space">20dp</item>
+        <item name="ZButton_percent_bitmap_center">0.6</item>
         <item name="android:layout_height">114dp</item>
-        <item name="textsize">14sp</item>
+        <item name="ZButton_textsize">14sp</item>
     </style>
     <style name="mypopwindow_anim_style">
         <item name="android:windowEnterAnimation">@anim/popshow_anim</item>

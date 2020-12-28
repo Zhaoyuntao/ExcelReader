@@ -3,13 +3,16 @@ package com.test.test2app.faceview;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.Base64;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 
@@ -41,11 +44,11 @@ class DefaultFaceUtils {
         PaintFlagsDrawFilter paintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
         canvas.setDrawFilter(paintFlagsDrawFilter);
 
-        draw(canvas, displayName, context);
+        draw(canvas, displayName, context, -1, 1);
         return bitmap;
     }
 
-    public static void draw(@androidx.annotation.NonNull Canvas canvas, String displayName, Context context) {
+    public static void draw(@NonNull Canvas canvas, String displayName, Context context, int colorBack, float percentText) {
         if (!initColors(context)) {
             return;
         }
@@ -58,17 +61,25 @@ class DefaultFaceUtils {
 
         float x = w_bitmap / 2f;
         float y = height / 2f;
-
+        int[] color;
+        if (colorBack == -1) {
+            color = getRandomColor(displayName);
+        } else {
+            color = new int[]{colorBack, colorBack};
+        }
         Paint paint = new Paint();
         paint.setAntiAlias(true);
-        android.graphics.Shader shader = new LinearGradient(0, 0, 0, height, getRandomColor(displayName), null, android.graphics.Shader.TileMode.REPEAT);
+        Shader shader = new LinearGradient(0, 0, 0, height, color, null, Shader.TileMode.REPEAT);
         paint.setStyle(Paint.Style.FILL);
         paint.setShader(shader);
         canvas.drawRect(0, 0, width, height, paint);
         paint.setShader(null);
         if (!TextUtils.isEmpty(displayName)) {
             float textSize = (pattern.matcher(displayName).matches() || displayName.length() == 1) ? w_bitmap / 2.2f : w_bitmap / 2.8f;
-            int color_text = android.graphics.Color.WHITE;
+            if (percentText > 0) {
+                textSize *= percentText;
+            }
+            int color_text = Color.WHITE;
             paint.setColor(color_text);
             paint.setStyle(Paint.Style.FILL);
             paint.setTypeface(Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD));
@@ -111,21 +122,16 @@ class DefaultFaceUtils {
 
     /**
      * get a random color
-     *
-     * @param name
-     * @return
      */
     private static int[] getRandomColor(String name) {
         if (!TextUtils.isEmpty(name) && colors_start != null && colors_start.length > 0 && colors_end != null && colors_end.length > 0) {
-            byte[] arr = Base64.encode(name.getBytes(), Base64.NO_WRAP);
-            if (arr != null && arr.length > 0) {
-                long sum = 0;
-                for (byte number : arr) {
-                    sum += number;
-                }
-                int index = new Random(sum).nextInt(Math.min(colors_start.length, colors_end.length));
-                return new int[]{colors_start[index], colors_end[index]};
+            int sum = 0;
+            int count = name.length();
+            for (int i = 0; i < count; i++) {
+                sum += name.charAt(i);
             }
+            int index = sum % Math.min(colors_start.length, colors_end.length);
+            return new int[]{colors_start[index], colors_end[index]};
         }
         return colors_default;
     }

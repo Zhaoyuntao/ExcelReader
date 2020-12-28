@@ -94,7 +94,6 @@ public class DefaultFaceView extends ImageView {
 
     private void initShader() {
         if (!TextUtils.isEmpty(name)) {
-            S.s("h:" + h_view);
             shader = new LinearGradient(0, 0, 0, h_view, getRandomColor(name), null, Shader.TileMode.REPEAT);
         }
     }

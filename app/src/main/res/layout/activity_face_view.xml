@@ -10,59 +10,25 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity2_record">
 
-    <com.test.test2app.faceview.BlueFaceView
-        android:id="@+id/faceView1"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        app:BlueFaceView_firstName="H"
-        app:BlueFaceView_statusDrawable="@drawable/status_user_online_meeting" />
+    <com.test.test2app.faceview.ZLinearLayout
+        android:id="@+id/face_container"
+        android:background="#ff0000"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
 
-<!--    <com.test.test2app.faceview.BlueFaceView-->
-<!--        android:id="@+id/faceView2"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        app:BlueFaceView_firstName="W"-->
-<!--        app:BlueFaceView_statusDrawable="@drawable/status_user_online_mobile" />-->
+        <com.test.test2app.faceview.BlueFaceView
+            android:id="@+id/faceView1"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
+            app:BlueFaceView_firstName="H"
+            app:BlueFaceView_offsetX="6dp"
+            app:BlueFaceView_useRoundBreach="true"
+            app:BlueFaceView_offsetY="6dp"
+            app:BlueFaceView_statusDrawable="@drawable/status_user_online_meeting" />
+    </com.test.test2app.faceview.ZLinearLayout>
 
-<!--    <com.test.test2app.faceview.BlueFaceView-->
-<!--        android:id="@+id/faceView3"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        app:BlueFaceView_firstName="Y"-->
-<!--        app:BlueFaceView_statusDrawable="@drawable/status_user_offline" />-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        android:orientation="horizontal">-->
-<!--        <com.test.test2app.faceview.BlueFaceView-->
-<!--            android:id="@+id/faceView4"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            app:BlueFaceView_firstName="H"-->
-<!--            app:BlueFaceView_statusDrawable="@drawable/status_user_online_meeting" />-->
-
-<!--        <com.test.test2app.faceview.BlueFaceView-->
-<!--            android:id="@+id/faceView5"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            app:BlueFaceView_firstName="W"-->
-<!--            app:BlueFaceView_statusDrawable="@drawable/status_user_online_mobile" />-->
-
-<!--        <com.test.test2app.faceview.BlueFaceView-->
-<!--            android:id="@+id/faceView6"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            app:BlueFaceView_firstName="Y"-->
-<!--            app:BlueFaceView_statusDrawable="@drawable/status_user_offline" />-->
-<!--    </LinearLayout>-->
     <TextView
         android:layout_width="200dp"
         android:layout_height="wrap_content"/>

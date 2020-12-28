@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="diffComparator" target="1.7" />
       <module name="excelReader" target="1.7" />
       <module name="MyJava" target="1.7" />
+      <module name="test2app.app" target="1.8" />
+      <module name="test2app.mylibrary" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

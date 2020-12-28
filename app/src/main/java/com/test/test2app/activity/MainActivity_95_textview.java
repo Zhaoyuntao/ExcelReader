@@ -1,37 +1,39 @@
 package com.test.test2app.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.emoji.text.EmojiCompat;
-
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.test.test2app.BaseActivity;
 import com.test.test2app.R;
 import com.test.test2app.textview.ZTestTextView;
-import com.zhaoyuntao.androidutils.tools.S;
-import com.zhaoyuntao.androidutils.tools.thread.TP;
-import com.zhaoyuntao.androidutils.tools.thread.ZRunnable;
+import com.zhaoyuntao.androidutils.tools.T;
 
-import java.text.BreakIterator;
-
-public class MainActivity_95_textview extends AppCompatActivity {
+public class MainActivity_95_textview extends BaseActivity {
 
     ZTestTextView zTextView;
     EditText editText;
     LinearLayout linearLayout;
-
+    TextWatcher textWatcher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_95_textview);
-        editText=findViewById(R.id.edit);
-        linearLayout=findViewById(R.id.abc);
-        editText.addTextChangedListener(new TextWatcher() {
+        editText = findViewById(R.id.edit);
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("abcdefg ");
+        spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.RED), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        editText.setText(spannableStringBuilder);
+        linearLayout = findViewById(R.id.abc);
+        editText.addTextChangedListener(textWatcher=new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -44,12 +46,30 @@ public class MainActivity_95_textview extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                zTextView.setText(s, TextView.BufferType.SPANNABLE);
+//                zTextView.setText(s, TextView.BufferType.SPANNABLE);
+//                editText.removeTextChangedListener(textWatcher);
+//                SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(s);
+//                spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.RED), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                editText.setText(spannableStringBuilder);
+//                editText.setSelection(s.length());
+//                editText.addTextChangedListener(textWatcher);
             }
         });
-        String text="\uD83D\uDC4D\uD83C\uDFFF";
+        String text = "\uD83D\uDC4D\uD83C\uDFFF";
         zTextView = findViewById(R.id.text);
         zTextView.setText(text, TextView.BufferType.SPANNABLE);
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder("abcdefg ");
+                spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.RED), 0, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                editText.removeTextChangedListener(textWatcher);
+                editText.append(spannableStringBuilder);
+                T.t(activity(), editText.isEnabled());
+                editText.addTextChangedListener(textWatcher);
+            }
+        });
 //        zTextView.setText(text);
 //        TP.init();
 //        TP.runOnUiDelayedSafely(new ZRunnable(this) {

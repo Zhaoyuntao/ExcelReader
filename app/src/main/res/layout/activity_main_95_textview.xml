@@ -37,4 +37,13 @@
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:background="#ffffff" />
+
+    <Button
+        android:id="@+id/button"
+        android:text="disable"
+        android:background="#ff9988"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </FrameLayout>

@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -18,16 +19,18 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.MainActivity_97_textview_spannable">
+
+        </activity>
+        <activity android:name=".activity.MainActivity_95_textview">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity_95_textview"></activity>
         <activity
             android:name=".activity.MainActivity_94_wallpaper"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.MainActivity93_threadPool" />
         <activity android:name=".activity.MainActivity91_Qmoji" />
         <activity android:name=".activity.MainActivity92_huawei_meeting" />
@@ -37,11 +40,15 @@
 
         </activity>
         <activity android:name=".activity.MainActivity6_pay" />
-        <activity android:name=".activity.MainActivity5_takephoto" />
+        <activity android:name=".activity.MainActivity5_takephoto" >
+
+        </activity>
         <activity android:name=".activity.MainActivity4_grouptips" />
         <activity android:name=".activity.MainActivity3_sms" />
         <activity android:name=".activity.MainActivity2_record" />
-        <activity android:name=".activity.MainActivity_96_faceview"></activity>
+        <activity android:name=".activity.MainActivity_96_faceview">
+
+        </activity>
         <activity
             android:name=".MainActivity_inputbar"
             android:windowSoftInputMode="adjustPan" />

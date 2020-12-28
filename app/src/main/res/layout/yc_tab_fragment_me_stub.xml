@@ -19,8 +19,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
-            app:color_back="#dbecf2"
-            app:radius="10dp">
+            app:ZButton_color_back="#dbecf2"
+            app:ZButton_radius="10dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -80,11 +80,11 @@
                         <com.zhaoyuntao.androidutils.component.ZButton
                             android:layout_width="72dp"
                             android:layout_height="72dp"
-                            app:radius="36dp"
+                            app:ZButton_radius="36dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginEnd="19dp"
-                            app:style_img_back="clip"
-                            app:img_back="@drawable/photo" />
+                            app:ZButton_style_img_back="clip"
+                            app:ZButton_img_back="@drawable/photo" />
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -136,8 +136,8 @@
                 android:layout_width="127dp"
                 android:layout_height="72dp"
                 android:layout_marginEnd="10dp"
-                app:style_img_back="clip"
-                app:img_back="@drawable/pic_10" />
+                app:ZButton_style_img_back="clip"
+                app:ZButton_img_back="@drawable/pic_10" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -226,8 +226,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_1"
-                        app:text_center="EID" />
+                        app:ZButton_img_center="@drawable/pic_1"
+                        app:ZButton_text_center="EID" />
 
                     <ImageView
                         android:layout_width="1dp"
@@ -240,8 +240,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_2"
-                        app:text_center="New Passport" />
+                        app:ZButton_img_center="@drawable/pic_2"
+                        app:ZButton_text_center="New Passport" />
 
                     <ImageView
                         android:layout_width="1dp"
@@ -254,8 +254,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_3"
-                        app:text_center="Visa" />
+                        app:ZButton_img_center="@drawable/pic_3"
+                        app:ZButton_text_center="Visa" />
                 </LinearLayout>
 
                 <ImageView
@@ -274,8 +274,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_4"
-                        app:text_center="Family Book" />
+                        app:ZButton_img_center="@drawable/pic_4"
+                        app:ZButton_text_center="Family Book" />
 
                     <ImageView
                         android:layout_width="1dp"
@@ -288,8 +288,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_5"
-                        app:text_center="E-gate" />
+                        app:ZButton_img_center="@drawable/pic_5"
+                        app:ZButton_text_center="E-gate" />
 
                     <ImageView
                         android:layout_width="1dp"
@@ -302,8 +302,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_6"
-                        app:text_center="E-form" />
+                        app:ZButton_img_center="@drawable/pic_6"
+                        app:ZButton_text_center="E-form" />
                 </LinearLayout>
 
                 <ImageView
@@ -322,8 +322,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_7"
-                        app:text_center="Contact Us" />
+                        app:ZButton_img_center="@drawable/pic_7"
+                        app:ZButton_text_center="Contact Us" />
 
                     <ImageView
                         android:layout_width="1dp"
@@ -336,8 +336,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_8"
-                        app:text_center="Complaints" />
+                        app:ZButton_img_center="@drawable/pic_8"
+                        app:ZButton_text_center="Complaints" />
 
                     <ImageView
                         android:layout_width="1dp"
@@ -350,8 +350,8 @@
                         android:layout_width="0dp"
                         android:layout_height="114dp"
                         android:layout_weight="1"
-                        app:img_center="@drawable/pic_9"
-                        app:text_center="Poll Archive" />
+                        app:ZButton_img_center="@drawable/pic_9"
+                        app:ZButton_text_center="Poll Archive" />
                 </LinearLayout>
             </LinearLayout>
 

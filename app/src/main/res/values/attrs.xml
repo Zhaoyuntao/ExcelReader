@@ -53,14 +53,18 @@
     </declare-styleable>
     <declare-styleable name="BlueFaceView">
         <attr name="BlueFaceView_radius" format="dimension" />
+        <attr name="BlueFaceView_backgroundColor" format="color" />
+        <attr name="BlueFaceView_useRoundBreach" format="boolean" />
         <attr name="BlueFaceView_firstName" format="string" />
         <attr name="BlueFaceView_lastName" format="string" />
         <attr name="BlueFaceView_radiusStatus" format="dimension" />
         <attr name="BlueFaceView_percent" format="float" />
+        <attr name="BlueFaceView_percentText" format="float" />
         <attr name="BlueFaceView_widthOfStatus" format="dimension" />
         <attr name="BlueFaceView_heightOfStatus" format="dimension" />
         <attr name="BlueFaceView_offsetX" format="dimension" />
         <attr name="BlueFaceView_offsetY" format="dimension" />
         <attr name="BlueFaceView_statusDrawable" format="reference" />
+        <attr name="BlueFaceView_hideStatusDrawable" format="boolean" />
     </declare-styleable>
 </resources>

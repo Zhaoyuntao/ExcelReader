@@ -2,7 +2,9 @@ package com.test.test2app.faceview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
@@ -10,6 +12,8 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewOutlineProvider;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -34,15 +38,24 @@ public class BlueFaceView extends GifImageView {
     private int originWidth;
     private int originHeight;
     private Drawable defaultFace;
+    private Drawable drawableLast;
+    private int defaultFaceId;
+    private String defaultFirstName;
+    private String defaultLastName;
+
     private String firstName;
     private String lastName;
     private float radiusRoundConner;
     private boolean isGroup;
     private RectF rectF;
     private float percent;
+    private float percentText;
+    private int colorBack;
 
     //Status icon.
     private Drawable statusDrawable;
+
+    private boolean hideStatus;
     private RectF rectFStatus;
     private Path pathStatus;
     private int widthOfStatus;
@@ -51,6 +64,9 @@ public class BlueFaceView extends GifImageView {
     private int xOffset;
     private int yOffset;
     private float[] radiusArray;
+
+    private boolean useRoundBreach;
+    private Paint paint;
 
     public BlueFaceView(Context context) {
         super(context);
@@ -81,18 +97,31 @@ public class BlueFaceView extends GifImageView {
             yOffset = typedArray.getDimensionPixelSize(R.styleable.BlueFaceView_BlueFaceView_offsetY, 0);
             radiusStatusRoundConner = typedArray.getDimensionPixelSize(R.styleable.BlueFaceView_BlueFaceView_radiusStatus, 0);
             percent = typedArray.getFloat(R.styleable.BlueFaceView_BlueFaceView_percent, 0.8f);
+            percentText = typedArray.getFloat(R.styleable.BlueFaceView_BlueFaceView_percent, 1f);
             statusDrawable = typedArray.getDrawable(R.styleable.BlueFaceView_BlueFaceView_statusDrawable);
+            hideStatus = typedArray.getBoolean(R.styleable.BlueFaceView_BlueFaceView_hideStatusDrawable, false);
             firstName = typedArray.getString(R.styleable.BlueFaceView_BlueFaceView_firstName);
             lastName = typedArray.getString(R.styleable.BlueFaceView_BlueFaceView_lastName);
+            colorBack = typedArray.getColor(R.styleable.BlueFaceView_BlueFaceView_backgroundColor, -1);
+            useRoundBreach = typedArray.getBoolean(R.styleable.BlueFaceView_BlueFaceView_useRoundBreach, false);
             typedArray.recycle();
         } else {
             xOffset = UiUtils.dipToPx(10);
             yOffset = UiUtils.dipToPx(10);
             percent = 0.8f;
         }
-        setName(firstName, lastName);
+        if (!TextUtils.isEmpty(firstName) || !TextUtils.isEmpty(lastName)) {
+            setName(firstName, lastName);
+        }
         path = new Path();
         pathStatus = new Path();
+        setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), radiusStatusRoundConner);
+            }
+        });
+        setClipToOutline(true);
     }
 
     public void setName(String firstName, String lastName) {
@@ -115,14 +144,51 @@ public class BlueFaceView extends GifImageView {
      * @param isGroup   If true,default face will be a picture.
      */
     public void setName(String firstName, String lastName, boolean isGroup, @DrawableRes int drawableResourceId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        boolean isNeedChange = false;
+        if (!TextUtils.isEmpty(firstName)) {
+            if (this.defaultFirstName == null || (!this.defaultFirstName.equals(firstName))) {
+                isNeedChange = true;
+                this.defaultFirstName = firstName;
+            }
+
+            this.firstName = firstName.toUpperCase();
+        } else {
+            if (this.defaultFirstName == null) {
+                this.defaultFirstName = firstName;
+                isNeedChange = true;
+            }
+            this.firstName = firstName;
+        }
+        if (!TextUtils.isEmpty(lastName)) {
+            if (this.defaultLastName == null || (!this.defaultLastName.equals(lastName))) {
+                isNeedChange = true;
+                this.defaultLastName = lastName;
+
+            }
+            this.lastName = lastName.toUpperCase();
+        } else {
+            if (this.defaultLastName == null) {
+                this.defaultLastName = lastName;
+                isNeedChange = true;
+            }
+            this.lastName = lastName;
+        }
+
+        if (this.isGroup != isGroup) {
+            isNeedChange = true;
+        }
         this.isGroup = isGroup;
         try {
+            if (this.defaultFaceId == 0 || (this.defaultFaceId != drawableResourceId)) {
+                isNeedChange = true;
+            }
+            this.defaultFaceId = drawableResourceId;
             statusDrawable = ContextCompat.getDrawable(getContext(), drawableResourceId);
         } catch (Exception ignore) {
         }
-        changeFaceType();
+        if (isNeedChange) {
+            changeFaceType();
+        }
     }
 
     private void changeFaceType() {
@@ -149,11 +215,11 @@ public class BlueFaceView extends GifImageView {
             } else {
                 this.lastName = "";
             }
-            defaultFace = new BlueFaceDrawable(getContext(), this.firstName + this.lastName);
+            defaultFace = new BlueFaceDrawable(getContext(), this.firstName + this.lastName, colorBack, percentText);
         } else {
             defaultFace = getResources().getDrawable(R.drawable.default_face_group, null);
         }
-        invalidate();
+        postInvalidate();
     }
 
     @Override
@@ -166,11 +232,10 @@ public class BlueFaceView extends GifImageView {
                 return;
             }
         }
-        Object drawableLast = getTag();
         if (drawableLast != drawable) {
             originWidth = 0;
             originHeight = 0;
-            setTag(drawable);
+            drawableLast = drawable;
         }
         int widthCanvas = getWidth();
         int heightCanvas = getHeight();
@@ -207,7 +272,7 @@ public class BlueFaceView extends GifImageView {
         path.reset();
         path.addRoundRect(rectF, radiusRoundConner, radiusRoundConner, Path.Direction.CW);
 
-        if (!isGroup && statusDrawable != null) {
+        if (!isGroup && statusDrawable != null && !hideStatus) {
             int leftStatus = widthCanvas - widthOfStatus;
             int topStatus = 0;
             int rightStatus = widthCanvas;
@@ -216,17 +281,59 @@ public class BlueFaceView extends GifImageView {
             rectFStatus.set(leftStatus - xOffset, topStatus, rightStatus, bottomStatus + yOffset);
             statusDrawable.setBounds(leftStatus, topStatus, rightStatus, bottomStatus);
             pathStatus.reset();
-            pathStatus.addRoundRect(rectFStatus, radiusArray, Path.Direction.CW);
-            path.op(pathStatus, Path.Op.DIFFERENCE);
-            statusDrawable.draw(canvas);
+            if (useRoundBreach) {
+                pathStatus.addCircle((leftStatus + rightStatus) / 2f, (bottomStatus + topStatus) / 2f, (rightStatus - leftStatus) / 2f + xOffset, Path.Direction.CW);
+                path.op(pathStatus, Path.Op.DIFFERENCE);
+                if (paint == null) {
+                    paint = new Paint();
+                    paint.setColor(ContextCompat.getColor(getContext(), R.color.color_main_blue_275edb));
+                }
+                canvas.drawCircle((leftStatus + rightStatus) / 2f, (bottomStatus + topStatus) / 2f, (rightStatus - leftStatus) / 2f, paint);
+            } else {
+                pathStatus.addRoundRect(rectFStatus, radiusArray, Path.Direction.CW);
+                path.op(pathStatus, Path.Op.DIFFERENCE);
+                statusDrawable.draw(canvas);
+            }
         }
 
         canvas.clipPath(path);
         drawable.draw(canvas);
     }
 
-    public void setStatusDrawable(@DrawableRes int statusDrawableResource) {
-        this.statusDrawable = ContextCompat.getDrawable(getContext(), statusDrawableResource);
+    public boolean isHideStatus() {
+        return hideStatus;
+    }
+
+    public void setHideStatus(boolean hideStatus) {
+        this.hideStatus = hideStatus;
         postInvalidate();
+    }
+
+    public void setStatusDrawable(@DrawableRes int statusDrawableResource) {
+        if (statusDrawableResource == 0) {
+            this.statusDrawable = null;
+        } else {
+            this.statusDrawable = ContextCompat.getDrawable(getContext(), statusDrawableResource);
+        }
+        postInvalidate();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        setLayerType(LAYER_TYPE_NONE, null);
+        super.onDetachedFromWindow();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        setLayerType(LAYER_TYPE_HARDWARE, null);
+    }
+
+    @Override
+    public void setImageBitmap(Bitmap bm) {
+        if (bm != null) {
+            super.setImageBitmap(bm);
+        }
     }
 }

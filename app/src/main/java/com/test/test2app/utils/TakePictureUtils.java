@@ -43,7 +43,12 @@ public class TakePictureUtils {
         if (photoGetter == null) {
             return;
         }
-        ZP.requestCameraPermission(activity, new ZP.RequestResult() {
+        ZP.requestCameraAndAudioAndWriteExternalPermissionWithNotice(activity, new ZP.RequestResultWithNotice() {
+            @Override
+            public void onShowNotice(PermissionSettings permissionSettings) {
+                permissionSettings.whenContinue();
+            }
+
             @Override
             public void onGranted(List<String> permissions) {
                 _takePhoto(activity, photoGetter);
@@ -67,7 +72,7 @@ public class TakePictureUtils {
         }
 //        final File file = new File(activity.getExternalFilesDir("abc_test"), "test_" + System.currentTimeMillis() + ".jpg");
         final File dir = activity.getExternalFilesDir("abc_test1");
-        final File file = new File(Environment.getExternalStorageDirectory() + "/abcdefg", "test_" + System.currentTimeMillis() + ".jpg");
+        final File file = new File(dir, "test_" + System.currentTimeMillis() + ".jpg");
         if (!dir.exists()) {
             dir.mkdirs();
         }

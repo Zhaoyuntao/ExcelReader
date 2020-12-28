@@ -20,9 +20,9 @@
         <com.zhaoyuntao.androidutils.component.ZButton
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:radius="40dp"
+            app:ZButton_radius="40dp"
             android:layout_marginBottom="20dp"
-            app:img_back="@drawable/abc"/>
+            app:ZButton_img_back="@drawable/abc"/>
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
@@ -52,10 +52,10 @@
         android:id="@+id/sessionInfo2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:color_border="#ffffff"
-        app:color_back="#00000000"
-        app:w_border="1px"
-        app:radius="2dp"
+        app:ZButton_color_border="#ffffff"
+        app:ZButton_color_back="#00000000"
+        app:ZButton_w_border="1px"
+        app:ZButton_radius="2dp"
         android:gravity="center">
     </com.zhaoyuntao.androidutils.component.ZButton>
 

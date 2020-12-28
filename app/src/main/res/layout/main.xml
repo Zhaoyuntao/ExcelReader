@@ -19,9 +19,9 @@
         <com.zhaoyuntao.androidutils.component.ZButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:color_back="#00000000"
-            app:color_border="@color/white"
-            app:w_border="1dp">
+            app:ZButton_color_back="#00000000"
+            app:ZButton_color_border="@color/white"
+            app:ZButton_w_border="1dp">
 
             <com.test.test2app.textview.ConversationTextView
                 android:id="@+id/ztextview"
@@ -45,9 +45,9 @@
         <com.zhaoyuntao.androidutils.component.ZButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:color_back="#00000000"
-            app:color_border="@color/white"
-            app:w_border="1dp">
+            app:ZButton_color_back="#00000000"
+            app:ZButton_color_border="@color/white"
+            app:ZButton_w_border="1dp">
 
             <com.test.test2app.textview.ConversationTextView
                 android:id="@+id/ztextview2"
