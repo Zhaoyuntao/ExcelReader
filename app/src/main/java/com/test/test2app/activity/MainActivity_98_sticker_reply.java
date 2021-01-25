@@ -3,31 +3,27 @@ package com.test.test2app.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.test.test2app.BaseActivity;
 import com.test.test2app.R;
-import com.test.test2app.stickerreply.StickerRepliedBean;
 import com.test.test2app.stickerreply.StickerRepliedParticipantItemBean;
-import com.test.test2app.stickerreply.StickerReplyView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.test.test2app.stickerreply.TestStickerAdapter;
 
 public class MainActivity_98_sticker_reply extends BaseActivity {
 
-    StickerReplyView stickerReplyView;
+    private TestStickerAdapter stickerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sticker_reply);
 
-        stickerReplyView = findViewById(R.id.view);
-
-
         findViewById(R.id.button_init).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                init();
+//                init();
             }
         });
         findViewById(R.id.button_add1).setOnClickListener(new View.OnClickListener() {
@@ -61,8 +57,10 @@ public class MainActivity_98_sticker_reply extends BaseActivity {
             }
         });
 
-        init();
-
+        stickerAdapter = new TestStickerAdapter();
+        RecyclerView recyclerView = findViewById(R.id.sticker_test_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity()));
+        recyclerView.setAdapter(stickerAdapter);
     }
 
     private void add(String sticker) {
@@ -71,34 +69,7 @@ public class MainActivity_98_sticker_reply extends BaseActivity {
         stickerRepliedParticipantItemBean.setName("abcd");
         stickerRepliedParticipantItemBean.setUid("abcd");
         stickerRepliedParticipantItemBean.setTime(System.currentTimeMillis());
-        stickerReplyView.addSticker(stickerRepliedParticipantItemBean);
+        stickerAdapter.debugAdd(stickerRepliedParticipantItemBean);
     }
 
-    private String[] arr = {"⬆️", "🈚️", "😄", "😯", "🐸"};
-
-    private void init() {
-        List<StickerRepliedBean> list = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-            StickerRepliedBean stickerRepliedBean = new StickerRepliedBean();
-            stickerRepliedBean.setSticker(arr[i]);
-            List<StickerRepliedParticipantItemBean> list1 = new ArrayList<>();
-            for (int j = 0; j <= i; j++) {
-                StickerRepliedParticipantItemBean stickerRepliedParticipantItemBean = new StickerRepliedParticipantItemBean();
-                if (j > 0) {
-                    stickerRepliedParticipantItemBean.setUid("abcd" + j);
-                } else {
-                    stickerRepliedParticipantItemBean.setUid("abcd");
-                }
-                stickerRepliedParticipantItemBean.setName("abcd");
-                stickerRepliedParticipantItemBean.setTime(123445);
-                stickerRepliedParticipantItemBean.setSticker(arr[i]);
-                list1.add(stickerRepliedParticipantItemBean);
-            }
-            stickerRepliedBean.setStickerRepliedParticipantItemBeans(list1);
-            stickerRepliedBean.setTime(i);
-            list.add(stickerRepliedBean);
-        }
-
-        stickerReplyView.initSticker(list);
-    }
 }

@@ -2,10 +2,15 @@ package com.test.test2app.stickerreply;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.test.test2app.R;
+import com.zhaoyuntao.androidutils.tools.S;
 
 import java.util.List;
 
@@ -14,9 +19,9 @@ import java.util.List;
  * on 28/12/2020
  * description:
  */
-public class StickerReplyView extends RecyclerView {
+public class StickerReplyView extends AutoFitView {
 
-    private StickerReplyAdapter stickerReplyAdapter;
+    private StickerReply2Adapter stickerReplyAdapter;
 
     public StickerReplyView(@NonNull Context context) {
         super(context);
@@ -34,11 +39,7 @@ public class StickerReplyView extends RecyclerView {
     }
 
     private void init() {
-        StickerReplyLayoutManager stickerReplyLayoutManager = new StickerReplyLayoutManager();
-        addItemDecoration(new StickerReplyItemDecoration());
-        setLayoutManager(stickerReplyLayoutManager);
-
-        stickerReplyAdapter = new StickerReplyAdapter();
+        stickerReplyAdapter = new StickerReply2Adapter();
         setAdapter(stickerReplyAdapter);
     }
 
@@ -47,10 +48,12 @@ public class StickerReplyView extends RecyclerView {
     }
 
     public void addSticker(StickerRepliedParticipantItemBean stickerRepliedParticipantItemBean) {
+        S.s("add sticker:"+stickerRepliedParticipantItemBean.getSticker());
         stickerReplyAdapter.addSticker(stickerRepliedParticipantItemBean);
     }
 
     public void removeSticker(StickerRepliedParticipantItemBean stickerRepliedParticipantItemBean) {
+        S.s("remove sticker:"+stickerRepliedParticipantItemBean.getSticker());
         stickerReplyAdapter.removeSticker(stickerRepliedParticipantItemBean);
     }
 }

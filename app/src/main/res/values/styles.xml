@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -15,6 +15,7 @@
         <item name="android:layout_height">114dp</item>
         <item name="ZButton_textsize">14sp</item>
     </style>
+
     <style name="mypopwindow_anim_style">
         <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
         <!-- 指定显示的动画xml -->
@@ -47,9 +48,20 @@
         <!--<item name="colorControlHighlight">@color/colorControlHighlight</item>-->
 
     </style>
+
     <style name="YCAppTheme" parent="YCBaseTheme">
         <!-- To set a custom color for the status bar, use the android:statusBarColor attribute when you extend the material theme.
         By default, android:statusBarColor inherits the value of android:colorPrimaryDark. -->
         <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <style name="background">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+    <style name="textView">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+    <style name="button" parent="textView">
+        <item name="android:background">@color/colorPrimaryDark2</item>
     </style>
 </resources>

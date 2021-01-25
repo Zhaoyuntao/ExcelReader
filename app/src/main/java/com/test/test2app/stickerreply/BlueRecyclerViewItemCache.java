@@ -78,13 +78,15 @@ public class BlueRecyclerViewItemCache<T extends Selectable<String>> {
      *
      * @param t
      */
-    public void addData(T t) {
+    public int addData(T t) {
         synchronized (lock) {
             if (data == null) {
                 throw new RuntimeException("BlueRecyclerViewItemCache.addData to a null list");
             }
+            int position = data.size();
             data.add(t);
             map.put(t.getUniqueIdentificationId(), t);
+            return position;
         }
     }
 
@@ -182,17 +184,16 @@ public class BlueRecyclerViewItemCache<T extends Selectable<String>> {
      * @param position
      * @return
      */
-    public boolean remove(int position) {
+    public T remove(int position) {
         synchronized (lock) {
             if (data == null || position < 0 || position >= data.size()) {
-                return false;
+                return null;
             }
             T t = data.remove(position);
             if (t != null) {
-                map.remove(t.getUniqueIdentificationId());
-                return true;
+                return map.remove(t.getUniqueIdentificationId());
             } else {
-                return false;
+                return null;
             }
         }
     }

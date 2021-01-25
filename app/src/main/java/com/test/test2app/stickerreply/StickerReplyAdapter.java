@@ -36,6 +36,7 @@ class StickerReplyAdapter extends RecyclerView.Adapter<StickerReplyViewHolder> {
     public void addSticker(StickerRepliedParticipantItemBean stickerRepliedParticipantItemBean) {
         StickerRepliedBean stickerRepliedBean = se.get(stickerRepliedParticipantItemBean.getSticker());
         if (stickerRepliedBean == null) {
+            S.s("add sticker:"+stickerRepliedParticipantItemBean);
             stickerRepliedBean = new StickerRepliedBean();
             stickerRepliedBean.setTime(stickerRepliedParticipantItemBean.getTime());
             stickerRepliedBean.setSticker(stickerRepliedParticipantItemBean.getSticker());
@@ -43,6 +44,7 @@ class StickerReplyAdapter extends RecyclerView.Adapter<StickerReplyViewHolder> {
             se.addData(stickerRepliedBean);
             notifyItemInserted(se.size() - 1);
         } else {
+            S.s("remove sticker:"+stickerRepliedParticipantItemBean);
             if (!stickerRepliedBean.contains(stickerRepliedParticipantItemBean)) {
                 stickerRepliedBean.addStickerRepliedParticipantItemBeans(stickerRepliedParticipantItemBean);
                 notifyItemChanged(se.getPosition(stickerRepliedBean));
@@ -80,7 +82,6 @@ class StickerReplyAdapter extends RecyclerView.Adapter<StickerReplyViewHolder> {
         }
         holder.setSticker(stickerRepliedBean.getSticker());
         holder.setStickerCount(stickerRepliedBean.size());
-        S.s("onBindViewHolder:size:"+stickerRepliedBean.size()+" sticker:"+stickerRepliedBean.getSticker());
         holder.setOnClickItemListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
